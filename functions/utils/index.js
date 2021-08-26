@@ -5,12 +5,13 @@ export const parseAssignedProperties = (properties) =>
   properties.reduce((output, property) => {
     const {
       key: { name: propertyName },
-      value: value,
+      value,
     } = property;
 
-    output[propertyName] = value;
-
-    return output;
+    return {
+      ...output,
+      [propertyName]: value,
+    };
   }, {});
 
 export const fetchRecord = async (modelName, properties, id) => {
@@ -25,13 +26,9 @@ export const fetchRecord = async (modelName, properties, id) => {
     }
   `;
 
-  try {
-    const {
-      data: { [queryName]: record },
-    } = await gql(query, { where: { id: { eq: id } } });
+  const {
+    data: { [queryName]: record },
+  } = await gql(query, { where: { id: { eq: id } } });
 
-    return record;
-  } catch (error) {
-    throw error;
-  }
+  return record;
 };

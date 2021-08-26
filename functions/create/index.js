@@ -1,10 +1,10 @@
 import { now, parseAssignedProperties, fetchRecord } from '../utils';
 
 const create = async ({ givenModel: { name: modelName }, mapping }) => {
-  const properties = parseAssignedProperties(mapping);
+  const assignProperties = parseAssignedProperties(mapping);
 
   const input = {
-    ...properties,
+    ...assignProperties,
     createdAt: now(),
     updatedAt: now(),
   };
@@ -19,22 +19,18 @@ const create = async ({ givenModel: { name: modelName }, mapping }) => {
     }
   `;
 
-  try {
-    const {
-      data: {
-        [mutationName]: { id },
-      },
-    } = await gql(mutation, { input });
+  const {
+    data: {
+      [mutationName]: { id },
+    },
+  } = await gql(mutation, { input });
 
-    const properties = Object.keys(input).join('\n');
-    const createdRecord = await fetchRecord(modelName, properties, id);
+  const properties = Object.keys(input).join('\n');
+  const createdRecord = await fetchRecord(modelName, properties, id);
 
-    return {
-      output: createdRecord,
-    };
-  } catch (error) {
-    throw error;
-  }
+  return {
+    output: createdRecord,
+  };
 };
 
 export default create;
