@@ -1,6 +1,34 @@
 {
-  "name": "app-functions",
+  "name": "native-functions",
   "version": "1.0.0",
   "dependencies": {},
-  "private": "true"
+  "private": "true",
+  "devDependencies": {
+    "@commitlint/config-angular": "^13.1.0",
+    "commitlint": "^13.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-prettier": "^3.4.1",
+    "husky": "^7.0.2",
+    "prettier": "^2.3.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && yarn prettier:check",
+      "commit-msg": "commitlint"
+    }
+  },
+  "scripts": {
+    "lint": "eslint --ext js ./functions",
+    "prettier:base": "prettier --single-quote",
+    "prettier:check": "yarn prettier:base --list-different \"src/**/*.js\"",
+    "prettier:write": "yarn prettier:base --write \"src/**/*.js\"",
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bettyblocks/native-functions.git"
+  }
 }
