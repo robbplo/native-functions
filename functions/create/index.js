@@ -1,6 +1,6 @@
 import { now, parseAssignedProperties, fetchRecord } from '../utils';
 
-const create = async ({ givenModel: { name: modelName }, mapping }) => {
+const create = async ({ model: { name: modelName }, mapping }) => {
   const assignProperties = parseAssignedProperties(mapping);
 
   const input = {
@@ -29,7 +29,7 @@ const create = async ({ givenModel: { name: modelName }, mapping }) => {
   const createdRecord = await fetchRecord(modelName, properties, id);
 
   return {
-    output: createdRecord,
+    as: createdRecord,
   };
 };
 
