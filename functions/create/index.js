@@ -26,7 +26,8 @@ const create = async ({ givenModel: { name: modelName }, mapping }) => {
       },
     } = await gql(mutation, { input });
 
-    const createdRecord = await fetchRecord(modelName, mapping, id);
+    const properties = Object.keys(input).join('\n');
+    const createdRecord = await fetchRecord(modelName, properties, id);
 
     return {
       output: createdRecord,

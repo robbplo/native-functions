@@ -13,17 +13,14 @@ export const parseAssignedProperties = (properties) =>
     return output;
   }, {});
 
-export const parseProperties = (properties) =>
-  properties.map(({ key: { name: propertyName } }) => propertyName).join('\n');
-
 export const fetchRecord = async (modelName, properties, id) => {
-  const fields = parseProperties(properties);
   const queryName = `one${modelName}`;
 
   const query = `
     query {
       ${queryName}(where: $where) {
-        ${fields}
+        id
+        ${properties}
       }
     }
   `;
