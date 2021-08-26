@@ -1,13 +1,11 @@
 {
   "name": "native-functions",
   "version": "1.0.0",
-  "dependencies": {
-    "@commitlint/prompt-cli": "^13.1.0"
-  },
   "private": "true",
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-angular": "^13.1.0",
+    "@commitlint/prompt-cli": "^13.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
