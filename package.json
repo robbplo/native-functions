@@ -1,11 +1,13 @@
 {
   "name": "native-functions",
   "version": "1.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "@commitlint/prompt-cli": "^13.1.0"
+  },
   "private": "true",
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
     "@commitlint/config-angular": "^13.1.0",
-    "commitlint": "^13.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -14,17 +16,12 @@
     "husky": "^7.0.2",
     "prettier": "^2.3.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint && yarn prettier:check",
-      "commit-msg": "commitlint"
-    }
-  },
   "scripts": {
+    "prepare": "husky install",
     "lint": "eslint --ext js ./functions",
     "prettier:base": "prettier --single-quote",
-    "prettier:check": "yarn prettier:base --list-different \"src/**/*.js\"",
-    "prettier:write": "yarn prettier:base --write \"src/**/*.js\"",
+    "prettier:check": "yarn prettier:base --list-different \"functions/**/*.js\"",
+    "prettier:write": "yarn prettier:base --write \"functions/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
