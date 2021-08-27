@@ -18,10 +18,10 @@ export const fetchRecord = async (modelName, properties, id) => {
   const queryName = `one${modelName}`;
 
   const query = `
-    query {
+    query($where: ${modelName}FilterInput) {
       ${queryName}(where: $where) {
         id
-        ${properties}
+        ${properties.join('\n')}
       }
     }
   `;

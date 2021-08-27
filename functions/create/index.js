@@ -12,7 +12,7 @@ const create = async ({ model: { name: modelName }, mapping }) => {
   const mutationName = `create${modelName}`;
 
   const mutation = `
-    mutation {
+    mutation($input: ${modelName}Input) {
       ${mutationName}(input: $input) {
         id
       }
@@ -25,7 +25,7 @@ const create = async ({ model: { name: modelName }, mapping }) => {
     },
   } = await gql(mutation, { input });
 
-  const properties = Object.keys(input).join('\n');
+  const properties = Object.keys(input);
   const createdRecord = await fetchRecord(modelName, properties, id);
 
   return {
