@@ -51,10 +51,6 @@ const root = {
       id: { eq: id },
     },
   }) {
-    if (!userDatabase[id]) {
-      throw new Error("Record doesn't exist");
-    }
-
     return userDatabase[id];
   },
   createUser({ input }) {

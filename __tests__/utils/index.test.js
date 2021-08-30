@@ -46,12 +46,22 @@ describe('Utility functions', () => {
   });
 
   test('fetchRecord returns an error when no record is found', async () => {
+    const result = await fetchRecord(
+      'User',
+      ['firstName', 'lastName', 'age'],
+      -1,
+    );
+
+    expect(result).toBeNull();
+  });
+
+  test('It throws an error for invalid input', async () => {
     expect.assertions(1);
 
     try {
-      await fetchRecord('User', ['firstName', 'lastName', 'age'], -1);
+      await fetchRecord('InvalidModel', [], 0);
     } catch ({ message }) {
-      expect(message).toContain("Record doesn't exist");
+      expect(message).toContain('Unknown type');
     }
   });
 });
