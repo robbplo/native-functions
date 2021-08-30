@@ -1,17 +1,14 @@
 const { graphql, buildSchema } = require('graphql');
+const User = require('../user');
 
-class User {
-  constructor(id, { firstName, lastName, age, createdAt, updatedAt }) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-  }
-}
-
-const userDatabase = {};
+const userDatabase = {
+  1: {
+    id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 30,
+  },
+};
 
 const schema = buildSchema(`
   type User {
@@ -54,12 +51,11 @@ const root = {
       id: { eq: id },
     },
   }) {
-    return {
-      id,
-      firstName: 'John',
-      lastName: 'Doe',
-      age: 30,
-    };
+    if (!userDatabase[id]) {
+      throw new Error("Record doesn't exist");
+    }
+
+    return userDatabase[id];
   },
   createUser({ input }) {
     const id = Math.floor((Math.random() + 1) * 100);
@@ -72,15 +68,12 @@ const root = {
   },
 };
 
-const gql = async (query, input) => {
-  const result = await graphql({
+const gql = async (query, input) =>
+  graphql({
     schema,
     source: query,
     rootValue: root,
     variableValues: input,
   });
-
-  return result;
-};
 
 module.exports = gql;

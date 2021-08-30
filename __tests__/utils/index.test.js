@@ -30,7 +30,7 @@ describe('Utility functions', () => {
     });
   });
 
-  test('fetchRecord', async () => {
+  test('fetchRecord returns an existing record', async () => {
     const result = await fetchRecord(
       'User',
       ['firstName', 'lastName', 'age'],
@@ -43,5 +43,15 @@ describe('Utility functions', () => {
       lastName: 'Doe',
       age: 30,
     });
+  });
+
+  test('fetchRecord returns an error when no record is found', async () => {
+    expect.assertions(1);
+
+    try {
+      await fetchRecord('User', ['firstName', 'lastName', 'age'], -1);
+    } catch ({ message }) {
+      expect(message).toContain("Record doesn't exist");
+    }
   });
 });
