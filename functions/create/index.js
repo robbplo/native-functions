@@ -19,17 +19,15 @@ const create = async ({ model: { name: modelName }, mapping }) => {
     }
   `;
 
-  const {
-    data: {
-      [mutationName]: { id },
-    },
-    errors,
-  } = await gql(mutation, { input });
+  const { data, errors } = await gql(mutation, { input });
 
   if (errors) {
     throw new Error(errors);
   }
 
+  const {
+    [mutationName]: { id },
+  } = data;
   const properties = Object.keys(input);
   const createdRecord = await fetchRecord(modelName, properties, id);
 
