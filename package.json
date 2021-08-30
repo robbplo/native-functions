@@ -13,6 +13,7 @@
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jest": "^24.4.0",
     "eslint-plugin-prettier": "^3.4.1",
     "graphql": "^15.5.1",
     "husky": "^7.0.2",
@@ -21,10 +22,10 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "lint": "eslint --ext js ./functions",
+    "lint": "eslint --ext js ./functions ./__tests__",
     "prettier:base": "prettier --single-quote",
-    "prettier:check": "yarn prettier:base --list-different \"functions/**/*.js\"",
-    "prettier:write": "yarn prettier:base --write \"functions/**/*.js\"",
+    "prettier:check": "yarn prettier:base --list-different \"{functions,__tests__}/**/*.js\"",
+    "prettier:write": "yarn prettier:base --write \"{functions,__tests__}/**/*.js\"",
     "test": "jest --coverage"
   },
   "repository": {
