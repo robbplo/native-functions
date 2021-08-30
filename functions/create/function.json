@@ -9,7 +9,7 @@
       "meta": {
         "type": "Model"
       },
-      "name": "givenModel",
+      "name": "model",
       "label": "Model",
       "info": "The model you want to create a record for.",
       "validations": {
@@ -19,14 +19,14 @@
     {
       "meta": {
         "type": "PropertyMap",
-        "model": "givenModel"
+        "model": "model"
       },
       "name": "mapping",
       "label": "Value Mapping",
       "info": "Mapping of values to properties for the created record. The properties are based on the model selected.",
       "dependsOn": [
         {
-          "option": "givenModel",
+          "option": "model",
           "action": "CLEAR"
         }
       ]
@@ -36,11 +36,11 @@
         "type": "Output",
         "output": {
           "type": "Record",
-          "model": "givenModel"
+          "model": "model"
         }
       },
-      "name": "output",
-      "label": "as",
+      "name": "as",
+      "label": "As",
       "info": "The name of the variable you want for the newly created record",
       "validations": {
         "required": true

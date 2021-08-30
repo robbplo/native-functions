@@ -18,17 +18,21 @@ export const fetchRecord = async (modelName, properties, id) => {
   const queryName = `one${modelName}`;
 
   const query = `
-    query {
+    query($where: ${modelName}FilterInput) {
       ${queryName}(where: $where) {
         id
-        ${properties}
+        ${properties.join('\n')}
       }
     }
   `;
 
-  const {
-    data: { [queryName]: record },
-  } = await gql(query, { where: { id: { eq: id } } });
+  const { data, errors } = await gql(query, { where: { id: { eq: id } } });
+
+  if (errors) {
+    throw new Error(errors);
+  }
+
+  const { [queryName]: record } = data;
 
   return record;
 };
