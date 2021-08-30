@@ -28,7 +28,12 @@ export const fetchRecord = async (modelName, properties, id) => {
 
   const {
     data: { [queryName]: record },
+    errors,
   } = await gql(query, { where: { id: { eq: id } } });
+
+  if (errors) {
+    throw new Error(errors);
+  }
 
   return record;
 };
