@@ -4,11 +4,12 @@
     "prettier"
   ],
   "plugins": [
-    "prettier"
+    "prettier",
+    "jest"
   ],
   "env": {
     "node": true,
-    "jasmine": true
+    "jest": true
   },
   "rules": {
     "no-restricted-globals": 0,
