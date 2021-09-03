@@ -39,7 +39,7 @@ describe('Native create', () => {
     try {
       await create({ model: { name: 'invalidModel' }, mapping: [] });
     } catch (error) {
-      expect(error).toBeInstanceOf(TypeError);
+      expect(error).toBeInstanceOf(Error);
     }
   });
 });
