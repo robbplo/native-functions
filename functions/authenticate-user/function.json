@@ -1,0 +1,35 @@
+{
+  "name": "authenticateUser",
+  "description": "Authenticates a user",
+  "label": "Authenticate User",
+  "category": "CRUD",
+  "icon": "AuthenticateIcon",
+  "options": [
+    {
+      "meta": {
+        "type": "AuthenticationProfile"
+      },
+      "name": "authenticationProfile",
+      "label": "Authentication Profile",
+      "info": "The authentication profile you want to use to authenticate the user.",
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "meta": {
+        "type": "Output",
+        "output": {
+          "type": "Text"
+        }
+      },
+      "name": "jwt",
+      "label": "JWT",
+      "info": "The name of the variable you want for the generated token",
+      "validations": {
+        "required": true
+      }
+    }
+  ],
+  "yields": "NONE"
+}
