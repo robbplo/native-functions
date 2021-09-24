@@ -1,6 +1,12 @@
 const { graphql, buildSchema } = require('graphql');
 const User = require('../user');
 
+class AuthenticationError extends Error {
+  constructor(message, extensions) {
+    super(message);
+    this.extensions = extensions;
+  }
+}
 const userDatabase = {
   1: {
     id: 1,
@@ -18,6 +24,10 @@ const schema = buildSchema(`
     age: Int
     createdAt: String
     updatedAt: String
+  }
+
+  type Token{
+    jwtToken: String
   }
 
   input UserInput {
@@ -42,6 +52,7 @@ const schema = buildSchema(`
 
   type Mutation {
     createUser(input: UserInput): User
+    login(authProfileUuid: String, username: String, password: String): Token
   }
 `);
 
@@ -61,6 +72,20 @@ const root = {
     return {
       id,
     };
+  },
+  login({ username, password }) {
+    let output;
+
+    if (username === 'test@test.test' && password === 'test123') {
+      output = {
+        jwtToken: 'my-awesome-token',
+      };
+    } else {
+      throw new AuthenticationError('Wrong credentials, please try again', {
+        statusCode: 401,
+      });
+    }
+    return output;
   },
 };
 
