@@ -7,7 +7,7 @@ const USERNAME_PASSWORD = `
   `;
 const CUSTOM_AUTHENTICATION = `
     mutation($userId: Int!, , $authenticationProfileId: String!) {
-      generateJwt(userId: $userId, authenticationProfileId: $authenticationProfileId) {
+      generateJwt(userId: $userId, authProfileUuid: $authenticationProfileId) {
         jwtToken
       }
     }
@@ -19,6 +19,7 @@ const authenticateUser = async ({
   password,
   record,
 }) => {
+  const mutationName = kind === 'username_password' ? 'login' : 'generateJwt';
   const mutation =
     kind === 'username_password' ? USERNAME_PASSWORD : CUSTOM_AUTHENTICATION;
 
@@ -37,7 +38,7 @@ const authenticateUser = async ({
   }
 
   const {
-    login: { jwtToken: jwt },
+    [mutationName]: { jwtToken: jwt },
   } = data;
 
   return {
