@@ -20,7 +20,7 @@ const authenticateUser = async ({
   const { data, errors } = await gql(mutation, input);
 
   if (errors) {
-    throw new Error(errors);
+    throw errors;
   }
 
   const {
