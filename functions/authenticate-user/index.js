@@ -1,12 +1,14 @@
-const USERNAME_PASSWORD = `
+const USERNAME_PASSWORD_KIND = 'usernamePassword';
+
+const USERNAME_PASSWORD_MUTATION = `
     mutation($username: String!, $password: String!, $authenticationProfileId: String!) {
       login(username: $username, password: $password, authProfileUuid: $authenticationProfileId) {
         jwtToken
       }
     }
   `;
-const CUSTOM_AUTHENTICATION = `
-    mutation($userId: Int!, , $authenticationProfileId: String!) {
+const CUSTOM_AUTHENTICATION_MUTATION = `
+    mutation($userId: Int!, $authenticationProfileId: String!) {
       generateJwt(userId: $userId, authProfileUuid: $authenticationProfileId) {
         jwtToken
       }
@@ -14,17 +16,23 @@ const CUSTOM_AUTHENTICATION = `
   `;
 
 const authenticateUser = async ({
-  authenticationProfile: { id: authenticationProfileId, kind },
-  username,
-  password,
-  record,
+  authenticationProfile: {
+    authenticationProfile: { id: authenticationProfileId, kind },
+    username,
+    password,
+    userId,
+  },
 }) => {
-  const mutationName = kind === 'username_password' ? 'login' : 'generateJwt';
+  const mutationName =
+    kind === USERNAME_PASSWORD_KIND ? 'login' : 'generateJwt';
+
   const mutation =
-    kind === 'username_password' ? USERNAME_PASSWORD : CUSTOM_AUTHENTICATION;
+    kind === USERNAME_PASSWORD_KIND
+      ? USERNAME_PASSWORD_MUTATION
+      : CUSTOM_AUTHENTICATION_MUTATION;
 
   const userData =
-    kind === 'username_password' ? { username, password } : { userId: record };
+    kind === USERNAME_PASSWORD_KIND ? { username, password } : { userId };
 
   const input = {
     authenticationProfileId,
