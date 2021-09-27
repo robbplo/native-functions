@@ -7,28 +7,28 @@
   "options": [
     {
       "meta": {
-        "type": "AuthenticationProfile"
+        "type": "AuthenticationProfile",
+        "validations": {
+          "required": true
+        }
       },
       "name": "authenticationProfile",
       "label": "Authentication Profile",
-      "info": "The authentication profile you want to use to authenticate the user.",
-      "validations": {
-        "required": true
-      }
+      "info": "The authentication profile you want to use to authenticate the user."
     },
     {
       "meta": {
         "type": "Output",
         "output": {
           "type": "Text"
+        },
+        "validations": {
+          "required": true
         }
       },
       "name": "jwt",
       "label": "JWT",
-      "info": "The name of the variable you want for the generated token",
-      "validations": {
-        "required": true
-      }
+      "info": "The name of the variable you want for the generated token"
     }
   ],
   "yields": "NONE"
