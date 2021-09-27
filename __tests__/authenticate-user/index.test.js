@@ -2,14 +2,15 @@ import authenticateUser from '../../functions/authenticate-user';
 
 describe('Native authenticate user using username/password', () => {
   test('It authenticates a user', async () => {
-    const { jwt } = await authenticateUser({
+    const authenticationProfile = {
       authenticationProfile: {
         id: 'myAuthenticationProfile',
-        kind: 'username_password',
+        kind: 'usernamePassword',
       },
       username: 'test@test.test',
       password: 'test123',
-    });
+    };
+    const { jwt } = await authenticateUser({ authenticationProfile });
 
     expect(jwt).toBe('my-awesome-token');
   });
@@ -17,14 +18,18 @@ describe('Native authenticate user using username/password', () => {
   test('It handles errors for incorrect credentials', async () => {
     expect.assertions(2);
 
+    const authenticationProfile = {
+      authenticationProfile: {
+        id: 'myAuthenticationProfile',
+        kind: 'usernamePassword',
+      },
+      username: 'test@test.test',
+      password: 'wrongPassword',
+    };
+
     try {
       await authenticateUser({
-        authenticationProfile: {
-          id: 'myAuthenticationProfile',
-          kind: 'username_password',
-        },
-        username: 'test@test.test',
-        password: 'test1234',
+        authenticationProfile,
       });
     } catch (errors) {
       const { message, extensions } = errors[0];
@@ -38,13 +43,14 @@ describe('Native authenticate user using username/password', () => {
 
 describe('Native authenticate user using record id', () => {
   test('It authenticates a user', async () => {
-    const { jwt } = await authenticateUser({
+    const authenticationProfile = {
       authenticationProfile: {
         id: 'myAuthenticationProfile',
-        kind: 'custom_authentication',
+        kind: 'customAuthentication',
       },
-      record: 1,
-    });
+      userId: 1,
+    };
+    const { jwt } = await authenticateUser({ authenticationProfile });
 
     expect(jwt).toBe('my-awesome-token');
   });
@@ -52,14 +58,15 @@ describe('Native authenticate user using record id', () => {
   test('It handles errors for incorrect credentials', async () => {
     expect.assertions(2);
 
+    const authenticationProfile = {
+      authenticationProfile: {
+        id: 'myAuthenticationProfile',
+        kind: 'customAuthentication',
+      },
+      userId: 0,
+    };
     try {
-      await authenticateUser({
-        authenticationProfile: {
-          id: 'myAuthenticationProfile',
-          kind: 'custom_authentication',
-        },
-        record: 0,
-      });
+      await authenticateUser({ authenticationProfile });
     } catch (errors) {
       const { message, extensions } = errors[0];
       expect(message).toBe('Wrong credentials, please try again');
