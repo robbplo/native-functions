@@ -23,9 +23,6 @@ const authenticateUser = async ({
     userId,
   },
 }) => {
-  const mutationName =
-    kind === USERNAME_PASSWORD_KIND ? 'login' : 'generateJwt';
-
   const mutation =
     kind === USERNAME_PASSWORD_KIND
       ? USERNAME_PASSWORD_MUTATION
@@ -46,7 +43,7 @@ const authenticateUser = async ({
   }
 
   const {
-    [mutationName]: { jwtToken: jwt },
+    login: { jwtToken: jwt },
   } = data;
 
   return {
