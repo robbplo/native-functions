@@ -55,7 +55,6 @@ const schema = buildSchema(`
   type Mutation {
     createUser(input: UserInput): User
     login(authProfileUuid: String!, username: String!, password: String!): Token
-    generateJwt(authProfileUuid: String!, userId: Int!): Token
   }
 `);
 
@@ -78,15 +77,6 @@ const root = {
   },
   login({ username, password }) {
     if (username === 'test@test.test' && password === 'test123') {
-      return {
-        jwtToken: 'my-awesome-token',
-      };
-    }
-
-    throw new AuthenticationError('Wrong credentials, please try again');
-  },
-  generateJwt({ userId }) {
-    if (userId !== 0) {
       return {
         jwtToken: 'my-awesome-token',
       };

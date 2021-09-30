@@ -26,7 +26,7 @@
     "prettier:base": "prettier --single-quote",
     "prettier:check": "yarn prettier:base --list-different \"{functions,__tests__}/**/*.js\"",
     "prettier:write": "yarn prettier:base --write \"{functions,__tests__}/**/*.js\"",
-    "test": "jest --coverage"
+    "test": "jest --coverage --config ./jest.config.js"
   },
   "repository": {
     "type": "git",
