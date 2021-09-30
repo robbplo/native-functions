@@ -11,16 +11,17 @@ const http = async ({
       const paramKey = index === 0 ? `?${key}` : key;
       return `${paramKey}=${encodeURIComponent(value)}`;
     })
-    .join("&");
+    .join('&');
   const fetchUrl = `${protocol}://${url}${queryString}`;
-  const fetchHeaders = headers.reduce((acc, { key, value }) => {
-    return { ...acc, [key]: value };
-  }, {});
+  const fetchHeaders = headers.reduce(
+    (acc, { key, value }) => ({ ...acc, [key]: value }),
+    {},
+  );
 
   const response = await fetch(fetchUrl, {
     method,
     headers: fetchHeaders,
-    ...(method !== "get" && { body }),
+    ...(method !== 'get' && { body }),
   });
 
   const data = await response.text();

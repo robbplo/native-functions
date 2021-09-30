@@ -22,6 +22,7 @@
     ]
   },
   "globals": {
-    "gql": "readonly"
+    "gql": "readonly",
+    "fetch": "readonly"
   }
 }
