@@ -1,0 +1,97 @@
+{
+  "name": "http",
+  "description": "Description",
+  "label": "HTTP(S)",
+  "category": "Misc",
+  "icon": "LightningIcon",
+  "options": [
+    {
+      "info": "Enter what protocol the receiving end needs to use. You can choose between HTTP and HTTPS, which one you should use depends on your host.",
+      "label": "Protocol",
+      "meta": {
+        "type": "Select",
+        "values": [
+          {
+            "label": "HTTP",
+            "value": "http"
+          },
+          {
+            "label": "HTTPS",
+            "value": "https"
+          }
+        ]
+      },
+      "name": "protocol"
+    },
+    {
+      "info": "Enter the URL of the API that you want to use.",
+      "label": "Url",
+      "meta": {
+        "type": "Text"
+      },
+      "name": "url"
+    },
+    {
+      "info": "",
+      "label": "Method",
+      "meta": {
+        "type": "Select",
+        "values": [
+          {
+            "label": "GET",
+            "value": "get"
+          },
+          {
+            "label": "POST",
+            "value": "post"
+          },
+          {
+            "label": "DELETE",
+            "value": "delete"
+          },
+          {
+            "label": "PUT",
+            "value": "put"
+          }
+        ]
+      },
+      "name": "method"
+    },
+    {
+      "info": "Sometimes you may need to pass some additional information in your request, this is possible by adding variables in your header.",
+      "label": "Headers",
+      "meta": {
+        "type": "Map"
+      },
+      "name": "headers"
+    },
+    {
+      "info": "",
+      "label": "Query Parameters",
+      "meta": {
+        "type": "Map"
+      },
+      "name": "queryParameters"
+    },
+    {
+      "info": "",
+      "label": "Body",
+      "meta": {
+        "type": "MultilineText"
+      },
+      "name": "body"
+    },
+    {
+      "meta": {
+        "type": "Output",
+        "output": {
+          "type": "Text"
+        }
+      },
+      "name": "as",
+      "label": "As",
+      "info": ""
+    }
+  ],
+  "yields": "NONE"
+}
