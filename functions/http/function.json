@@ -1,6 +1,6 @@
 {
   "name": "http",
-  "description": "Description",
+  "description": "Sends a HTTP(S) request",
   "label": "HTTP(S)",
   "category": "Misc",
   "icon": "LightningIcon",
@@ -32,7 +32,7 @@
       "name": "url"
     },
     {
-      "info": "",
+      "info": "HTTP defines a set of request methods to indicate the desired action to be performed for the given resource.",
       "label": "Method",
       "meta": {
         "type": "Select",
@@ -66,7 +66,7 @@
       "name": "headers"
     },
     {
-      "info": "",
+      "info": "Query parameters can be defined as the optional key-value pairs that appear after the question mark in the URL.",
       "label": "Query Parameters",
       "meta": {
         "type": "Map"
@@ -74,7 +74,7 @@
       "name": "queryParameters"
     },
     {
-      "info": "",
+      "info": "An optional body containing data associated with the request.",
       "label": "Body",
       "meta": {
         "type": "MultilineText"
@@ -90,7 +90,7 @@
       },
       "name": "as",
       "label": "As",
-      "info": ""
+      "info": "The name of the variable you want for the result of your request."
     }
   ],
   "yields": "NONE"
