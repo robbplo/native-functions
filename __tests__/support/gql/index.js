@@ -1,5 +1,5 @@
-const { graphql, buildSchema } = require('graphql');
-const User = require('../user');
+import { graphql, buildSchema } from 'graphql';
+import User from '../user';
 
 class AuthenticationError extends Error {
   constructor(message) {
@@ -94,4 +94,4 @@ const gql = async (query, input) =>
     variableValues: input,
   });
 
-module.exports = gql;
+export default gql;
