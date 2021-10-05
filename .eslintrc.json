@@ -13,6 +13,7 @@
   },
   "rules": {
     "no-restricted-globals": 0,
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "prettier/prettier": [
       "error",
       {
