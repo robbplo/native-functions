@@ -25,4 +25,4 @@ const fetch = async (url, _context, _options) => {
   }
 };
 
-module.exports = fetch;
+export default fetch;
