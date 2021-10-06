@@ -15,8 +15,15 @@ const userDatabase = {
     firstName: 'John',
     lastName: 'Doe',
     age: 30,
+    username: 'test@test.test',
+    password: 'test1234',
   },
 };
+
+const loginUser = (username, password) =>
+  !!Object.values(userDatabase).find(
+    (user) => user.username === username && user.password === password,
+  );
 
 const schema = buildSchema(`
   type User {
@@ -54,7 +61,7 @@ const schema = buildSchema(`
 
   type Mutation {
     createUser(input: UserInput): User
-    login(authProfileUuid: String!, username: String!, password: String!): Token
+    generateJwt(authProfileUuid: String!, userId: Int, username: String, password: String): Token
   }
 `);
 
@@ -75,11 +82,21 @@ const root = {
       id,
     };
   },
-  login({ username, password }) {
-    if (username === 'test@test.test' && password === 'test123') {
-      return {
-        jwtToken: 'my-awesome-token',
-      };
+  generateJwt({ authProfileUuid, userId, username, password }) {
+    if (authProfileUuid === 'username-password-profile-id') {
+      if (loginUser(username, password)) {
+        return {
+          jwtToken: 'my-awesome-token',
+        };
+      }
+    } else if (authProfileUuid === 'custom-authentication-profile-id') {
+      if (userDatabase[userId]) {
+        return {
+          jwtToken: 'my-awesome-token',
+        };
+      }
+    } else {
+      throw new Error('Unknown authentication profile');
     }
 
     throw new AuthenticationError('Wrong credentials, please try again');

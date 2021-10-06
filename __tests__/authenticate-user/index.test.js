@@ -4,11 +4,11 @@ describe('Native authenticate user using username/password', () => {
   test('It authenticates a user', async () => {
     const authenticationProfile = {
       authenticationProfile: {
-        id: 'myAuthenticationProfile',
+        id: 'username-password-profile-id',
         kind: 'usernamePassword',
       },
       username: 'test@test.test',
-      password: 'test123',
+      password: 'test1234',
     };
     const { jwt } = await authenticateUser({ authenticationProfile });
 
@@ -20,7 +20,7 @@ describe('Native authenticate user using username/password', () => {
 
     const authenticationProfile = {
       authenticationProfile: {
-        id: 'myAuthenticationProfile',
+        id: 'username-password-profile-id',
         kind: 'usernamePassword',
       },
       username: 'test@test.test',
@@ -37,6 +37,68 @@ describe('Native authenticate user using username/password', () => {
       expect(extensions).toMatchObject({
         statusCode: 401,
       });
+    }
+  });
+});
+
+describe('Native authenticate user using ID', () => {
+  test('It authenticates a user', async () => {
+    const authenticationProfile = {
+      authenticationProfile: {
+        id: 'custom-authentication-profile-id',
+        kind: 'customAuthentication',
+      },
+      userId: 1,
+    };
+    const { jwt } = await authenticateUser({ authenticationProfile });
+
+    expect(jwt).toBe('my-awesome-token');
+  });
+
+  test('It handles error for incorrect credentials', async () => {
+    expect.assertions(2);
+
+    const authenticationProfile = {
+      authenticationProfile: {
+        id: 'custom-authentication-profile-id',
+        kind: 'customAuthentication',
+      },
+      userId: -1,
+    };
+
+    try {
+      await authenticateUser({
+        authenticationProfile,
+      });
+    } catch (errors) {
+      const { message, extensions } = errors[0];
+      expect(message).toBe('Wrong credentials, please try again');
+      expect(extensions).toMatchObject({
+        statusCode: 401,
+      });
+    }
+  });
+});
+
+describe('Unknown authentication profiles', () => {
+  test('It handles error for unknown authentication profiles', async () => {
+    expect.assertions(1);
+
+    const authenticationProfile = {
+      authenticationProfile: {
+        id: 'unknown-authentication-profile-id',
+        kind: 'customAuthentication',
+      },
+      userId: 1,
+    };
+
+    try {
+      await authenticateUser({
+        authenticationProfile,
+      });
+    } catch (errors) {
+      const { message } = errors[0];
+      expect(message).toBe('Unknown authentication profile');
     }
   });
 });
