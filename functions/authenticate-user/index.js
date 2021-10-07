@@ -3,7 +3,13 @@ const USERNAME_PASSWORD_KIND = 'usernamePassword';
 const MUTATION = `
     mutation($authenticationProfileId: String!, $userId: Int, $username: String, $password: String) {
       generateJwt(authProfileUuid: $authenticationProfileId, userId: $userId, username: $username, password: $password) {
+        accessExpiresAt
+        accessExpiresIn
+        isValid
         jwtToken
+        refreshExpiresAt
+        refreshExpiresIn
+        refreshToken
       }
     }
   `;
@@ -30,12 +36,10 @@ const authenticateUser = async ({
     throw errors;
   }
 
-  const {
-    generateJwt: { jwtToken: jwt },
-  } = data;
+  const { generateJwt: as } = data;
 
   return {
-    jwt,
+    as,
   };
 };
 

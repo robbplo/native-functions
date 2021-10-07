@@ -10,9 +10,13 @@ describe('Native authenticate user using username/password', () => {
       username: 'test@test.test',
       password: 'test1234',
     };
-    const { jwt } = await authenticateUser({ authenticationProfile });
+    const { as } = await authenticateUser({ authenticationProfile });
 
-    expect(jwt).toBe('my-awesome-token');
+    expect(as).toMatchObject({
+      isValid: true,
+      jwtToken: 'my-awesome-token',
+      refreshToken: 'my-awesome-refresh-token',
+    });
   });
 
   test('It handles errors for incorrect credentials', async () => {
@@ -50,9 +54,13 @@ describe('Native authenticate user using ID', () => {
       },
       userId: 1,
     };
-    const { jwt } = await authenticateUser({ authenticationProfile });
+    const { as } = await authenticateUser({ authenticationProfile });
 
-    expect(jwt).toBe('my-awesome-token');
+    expect(as).toMatchObject({
+      isValid: true,
+      jwtToken: 'my-awesome-token',
+      refreshToken: 'my-awesome-refresh-token',
+    });
   });
 
   test('It handles error for incorrect credentials', async () => {

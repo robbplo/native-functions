@@ -36,7 +36,13 @@ const schema = buildSchema(`
   }
 
   type Token {
+    accessExpiresAt: String
+    accessExpiresIn: Int
+    isValid: Boolean
     jwtToken: String
+    refreshExpiresAt: String
+    refreshExpiresIn: Int
+    refreshToken: String
   }
 
   input UserInput {
@@ -83,17 +89,25 @@ const root = {
     };
   },
   generateJwt({ authProfileUuid, userId, username, password }) {
+    const accessExpiresIn = 7200;
+    const refreshExpiresIn = 259200;
+    const token = {
+      accessExpiresAt: new Date(Date.now() + accessExpiresIn * 1000),
+      accessExpiresIn,
+      isValid: true,
+      jwtToken: 'my-awesome-token',
+      refreshExpiresAt: new Date(Date.now() + refreshExpiresIn * 1000),
+      refreshExpiresIn,
+      refreshToken: 'my-awesome-refresh-token',
+    };
+
     if (authProfileUuid === 'username-password-profile-id') {
       if (loginUser(username, password)) {
-        return {
-          jwtToken: 'my-awesome-token',
-        };
+        return token;
       }
     } else if (authProfileUuid === 'custom-authentication-profile-id') {
       if (userDatabase[userId]) {
-        return {
-          jwtToken: 'my-awesome-token',
-        };
+        return token;
       }
     } else {
       throw new Error('Unknown authentication profile');
