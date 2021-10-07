@@ -19,7 +19,9 @@
     {
       "meta": {
         "type": "PropertyMap",
-        "model": "model",
+        "model": "model"
+      },
+      "configuration": {
         "dependsOn": [
           {
             "option": "model",
