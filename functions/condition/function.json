@@ -12,7 +12,7 @@
       },
       "name": "condition",
       "label": "Condition",
-      "info": "If this value is evaluated truthy the child steps will be executed"
+      "info": "If this value is evaluated truthy the child steps will be executed."
     }
   ],
   "yields": "ALL"
