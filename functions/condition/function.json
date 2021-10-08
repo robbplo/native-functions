@@ -2,7 +2,7 @@
   "name": "condition",
   "description": "Description",
   "label": "Condition",
-  "category": "Misc",
+  "category": "Flow",
   "icon": "ConditionIcon",
   "options": [
     {
