@@ -8,10 +8,13 @@
     {
       "meta": {
         "type": "Value",
-        "allowedKinds": ["NUMBER", "BOOLEAN", "STRING", "RECORD"]
+        "allowedKinds": ["NUMBER", "BOOLEAN", "STRING", "RECORD"],
+        "validations": {
+          "required": true
+        }
       },
-      "name": "condition",
-      "label": "Condition",
+      "name": "value",
+      "label": "Value",
       "info": "If this value is evaluated truthy the child steps will be executed."
     }
   ],
