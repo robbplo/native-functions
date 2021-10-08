@@ -1,6 +1,6 @@
 {
   "name": "condition",
-  "description": "Description",
+  "description": "Change the way the flow executes",
   "label": "Condition",
   "category": "Flow",
   "icon": "ConditionIcon",
@@ -11,7 +11,8 @@
         "allowedKinds": ["NUMBER", "BOOLEAN", "STRING", "RECORD"]
       },
       "name": "condition",
-      "label": "Condition"
+      "label": "Condition",
+      "info": "If this value is evaluated truthy the child steps will be executed"
     }
   ],
   "yields": "ALL"
