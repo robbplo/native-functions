@@ -28,7 +28,7 @@
       },
       "name": "as",
       "label": "As",
-      "info": "The name of the variable you want for the generated token"
+      "info": "The name of the variable you want for the generated token."
     }
   ],
   "yields": "NONE"
