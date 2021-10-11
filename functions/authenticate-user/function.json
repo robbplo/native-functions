@@ -26,9 +26,9 @@
           "required": true
         }
       },
-      "name": "jwt",
-      "label": "JWT",
-      "info": "The name of the variable you want for the generated token"
+      "name": "as",
+      "label": "As",
+      "info": "The name of the variable you want for the generated token."
     }
   ],
   "yields": "NONE"
