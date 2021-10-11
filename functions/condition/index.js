@@ -1,4 +1,4 @@
-const condition = async ({ value, steps }) => {
+const condition = async ({ value }, steps) => {
   const result = !!value;
 
   if (result) {
