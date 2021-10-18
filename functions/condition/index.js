@@ -2,7 +2,7 @@ const condition = async ({ value }, steps) => {
   const result = !!value;
 
   if (result) {
-    steps();
+    await steps();
   }
 
   return result;
