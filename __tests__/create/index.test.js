@@ -4,21 +4,27 @@ describe('Native create', () => {
   test('It creates a record', async () => {
     const mapping = [
       {
-        key: {
-          name: 'firstName',
-        },
+        key: [
+          {
+            name: 'firstName',
+          },
+        ],
         value: 'John',
       },
       {
-        key: {
-          name: 'lastName',
-        },
+        key: [
+          {
+            name: 'lastName',
+          },
+        ],
         value: 'Doe',
       },
       {
-        key: {
-          name: 'age',
-        },
+        key: [
+          {
+            name: 'age',
+          },
+        ],
         value: 30,
       },
     ];
