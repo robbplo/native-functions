@@ -4,7 +4,7 @@ export const now = () =>
 export const parseAssignedProperties = (properties) =>
   properties.reduce((output, property) => {
     const {
-      key: { name: propertyName },
+      key: [{ name: propertyName }],
       value,
     } = property;
 
