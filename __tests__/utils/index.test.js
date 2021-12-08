@@ -4,21 +4,27 @@ describe('Utility functions', () => {
   test('parseAssignedProperties', () => {
     const properties = [
       {
-        key: {
-          name: 'firstName',
-        },
+        key: [
+          {
+            name: 'firstName',
+          },
+        ],
         value: 'John',
       },
       {
-        key: {
-          name: 'lastName',
-        },
+        key: [
+          {
+            name: 'lastName',
+          },
+        ],
         value: 'Doe',
       },
       {
-        key: {
-          name: 'age',
-        },
+        key: [
+          {
+            name: 'age',
+          },
+        ],
         value: 30,
       },
     ];
