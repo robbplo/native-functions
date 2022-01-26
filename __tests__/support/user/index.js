@@ -7,6 +7,13 @@ class User {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
+
+  update({ firstName, lastName, age }) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    return this;
+  }
 }
 
 export default User;

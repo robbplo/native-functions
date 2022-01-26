@@ -67,6 +67,7 @@ const schema = buildSchema(`
 
   type Mutation {
     createUser(input: UserInput): User
+    updateUser(id: Int!, input: UserInput): User
     generateJwt(authProfileUuid: String!, userId: Int, username: String, password: String): Token
   }
 `);
@@ -87,6 +88,10 @@ const root = {
     return {
       id,
     };
+  },
+  updateUser({ id, input }) {
+    const user = new User(id, userDatabase[1]);
+    userDatabase[id] = user.update(input);
   },
   generateJwt({ authProfileUuid, userId, username, password }) {
     const accessExpiresIn = 7200;
