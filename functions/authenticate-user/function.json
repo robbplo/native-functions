@@ -2,7 +2,7 @@
   "name": "authenticateUser",
   "description": "Authenticates a user",
   "label": "Authenticate User",
-  "category": "CRUD",
+  "category": "Authentication",
   "icon": "AuthenticateIcon",
   "options": [
     {
