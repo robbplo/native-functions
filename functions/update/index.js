@@ -2,7 +2,7 @@ import { parseAssignedProperties, fetchRecord } from '../utils';
 
 const update = async ({
   selectedRecord: {
-    data: { id: recordId },
+    data: { id },
     model: { name: modelName },
   },
   mapping,
@@ -23,14 +23,14 @@ const update = async ({
     }
   `;
 
-  const { errors } = await gql(mutation, { id: recordId, input });
+  const { errors } = await gql(mutation, { id, input });
 
   if (errors) {
     throw errors;
   }
 
   const properties = Object.keys(input);
-  const updatedRecord = await fetchRecord(modelName, properties, recordId);
+  const updatedRecord = await fetchRecord(modelName, properties, id);
 
   return {
     as: updatedRecord,

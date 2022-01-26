@@ -10,14 +10,14 @@ class AuthenticationError extends Error {
   }
 }
 const userDatabase = {
-  1: {
+  1: new User(1, {
     id: 1,
     firstName: 'John',
     lastName: 'Doe',
     age: 30,
     username: 'test@test.test',
     password: 'test1234',
-  },
+  }),
 };
 
 const loginUser = (username, password) =>
@@ -90,8 +90,7 @@ const root = {
     };
   },
   updateUser({ id, input }) {
-    const user = new User(id, userDatabase[1]);
-    userDatabase[id] = user.update(input);
+    userDatabase[id].update(input);
   },
   generateJwt({ authProfileUuid, userId, username, password }) {
     const accessExpiresIn = 7200;

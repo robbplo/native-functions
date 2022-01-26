@@ -7,7 +7,7 @@ const mapping = [
         name: 'firstName',
       },
     ],
-    value: 'Hannah',
+    value: 'Doe',
   },
   {
     key: [
@@ -15,7 +15,7 @@ const mapping = [
         name: 'lastName',
       },
     ],
-    value: 'Brook',
+    value: 'John',
   },
   {
     key: [
@@ -37,8 +37,8 @@ describe('Native update', () => {
       mapping,
     });
     expect(result).toMatchObject({
-      firstName: 'Hannah',
-      lastName: 'Brook',
+      firstName: 'Doe',
+      lastName: 'John',
       age: 40,
     });
   });
