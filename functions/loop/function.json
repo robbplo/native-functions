@@ -1,0 +1,33 @@
+{
+  "name": "loop",
+  "description": "Loops through a given collection.",
+  "label": "Loop",
+  "category": "FLOW",
+  "icon": "LoopIcon",
+  "options": [
+    {
+      "meta": {
+        "type": "Collection",
+        "validations": {
+          "required": true
+        }
+      },
+      "name": "collection",
+      "label": "Collection",
+      "info": "The collection you want to loop through."
+    },
+    {
+      "meta": {
+        "type": "Output",
+        "output": {
+          "type": "Record",
+          "model": "collection",
+          "scoped": true
+        }
+      },
+      "name": "iterator",
+      "label": "Iterator name"
+    }
+  ],
+  "yields": "ALL"
+}
