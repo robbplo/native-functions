@@ -23,6 +23,9 @@
           "type": "Record",
           "model": "collection",
           "scoped": true
+        },
+        "validations": {
+          "required": true
         }
       },
       "name": "iterator",
