@@ -29,7 +29,8 @@
         }
       },
       "name": "iterator",
-      "label": "Iterator name"
+      "label": "Iterator name",
+      "info": "The name for the iterator under which the object of each iteration will be available."
     },
     {
       "meta": {
@@ -40,7 +41,8 @@
         }
       },
       "name": "index",
-      "label": "Index"
+      "label": "Index",
+      "info": "The name for the variable under which the current iteration will be available. Starts at 0. For example, in the 1st iteration this variable holds the value 0 and in 10th iteration, this variable holds the value 9."
     }
   ],
   "yields": "ALL"
