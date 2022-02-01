@@ -6,9 +6,11 @@ describe('Native loop', () => {
     const childSteps = jest.fn();
 
     await loop({ collection }, childSteps);
+
     expect(childSteps).toHaveBeenCalledTimes(collection.data.length);
     expect(childSteps).toHaveBeenLastCalledWith({
       iterator: collection.data.slice(-1).pop(),
+      index: collection.data.length - 1,
     });
   });
 
@@ -16,6 +18,7 @@ describe('Native loop', () => {
     const childSteps = jest.fn();
 
     await loop({ collection: { data: [] } }, childSteps);
+
     expect(childSteps).not.toHaveBeenCalled();
   });
 });

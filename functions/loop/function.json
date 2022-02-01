@@ -27,6 +27,17 @@
       },
       "name": "iterator",
       "label": "Iterator name"
+    },
+    {
+      "meta": {
+        "type": "Output",
+        "output": {
+          "type": "Number",
+          "scoped": true
+        }
+      },
+      "name": "index",
+      "label": "Index"
     }
   ],
   "yields": "ALL"
