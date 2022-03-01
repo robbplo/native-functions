@@ -67,6 +67,7 @@ const schema = buildSchema(`
 
   type Mutation {
     createUser(input: UserInput): User
+    deleteUser(id: Int!): User
     generateJwt(authProfileUuid: String!, userId: Int, username: String, password: String): Token
   }
 `);
@@ -87,6 +88,14 @@ const root = {
     return {
       id,
     };
+  },
+  deleteUser({ userId }) {
+    delete userDatabase[userId];
+    // console.log('userdatabase:', userDatabase);
+    if (userDatabase[userId] === undefined) {
+      return 'Record deleted';
+    }
+    return 'Error';
   },
   generateJwt({ authProfileUuid, userId, username, password }) {
     const accessExpiresIn = 7200;
