@@ -26,9 +26,9 @@ describe('Native delete', () => {
           model: { name: 'User' },
         },
       });
-    } catch (error) {
-      expect(error.length).toEqual(1);
-      expect(error[0].message).toBe('Record not found');
+    } catch (errors) {
+      expect(errors.length).toEqual(1);
+      expect(errors[0].message).toBe('Record not found');
     }
   });
 
@@ -42,8 +42,8 @@ describe('Native delete', () => {
           model: { name: 'invalidModel' },
         },
       });
-    } catch (error) {
-      expect(error.length).toEqual(1);
+    } catch (errors) {
+      expect(errors.length).toEqual(1);
     }
   });
 });

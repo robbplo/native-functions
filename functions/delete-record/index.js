@@ -18,6 +18,7 @@ const deleteRecord = async ({
   if (errors) {
     throw errors;
   }
+
   return {
     result: 'Record deleted',
   };
