@@ -6,14 +6,14 @@ const deleteRecord = async ({
 }) => {
   const mutationName = `delete${modelName}`;
   const mutation = `
-      mutation($input: ${modelName}Input) {
-        ${mutationName}(id: ${id}) {
+      mutation($id: Int!) {
+        ${mutationName}(id: $id) {
           id
         }
       }
     `;
 
-  const { errors } = await gql(mutation);
+  const { errors } = await gql(mutation, { id });
 
   if (errors) {
     throw errors;

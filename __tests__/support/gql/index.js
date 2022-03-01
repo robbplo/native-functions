@@ -9,6 +9,7 @@ class AuthenticationError extends Error {
     };
   }
 }
+
 const userDatabase = {
   1: new User(1, {
     id: 1,
@@ -93,12 +94,16 @@ const root = {
   updateUser({ id, input }) {
     userDatabase[id].update(input);
   },
-  deleteUser({ userId }) {
-    delete userDatabase[userId];
-    if (userDatabase[userId] === undefined) {
-      return 'Record deleted';
+  deleteUser({ id }) {
+    const user = userDatabase[id];
+
+    if (!user) {
+      throw new Error('Record not found');
+    } else {
+      delete userDatabase[id];
+
+      return user;
     }
-    return 'Error';
   },
   generateJwt({ authProfileUuid, userId, username, password }) {
     const accessExpiresIn = 7200;
