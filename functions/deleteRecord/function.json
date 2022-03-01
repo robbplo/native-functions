@@ -1,0 +1,39 @@
+{
+  "name": "deleteRecord",
+  "description": "Delete a record",
+  "label": "Delete record",
+  "category": "CRUD",
+  "icon": "DeleteIcon",
+  "options": [
+    {
+      "meta": {
+        "type": "Record",
+        "validations": {
+          "required": true
+        },
+        "additional": {
+          "model": [
+            "name",
+            {
+              "properties": ["name"]
+            }
+          ]
+        }
+      },
+      "name": "record",
+      "label": "Record",
+      "info": "The record to delete"
+    },
+    {
+      "name": "result",
+      "label": "Result",
+      "meta": {
+        "type": "Output",
+        "output": {
+          "type": "Text"
+        }
+      }
+    }
+  ],
+  "yields": "NONE"
+}
