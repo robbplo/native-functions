@@ -12,12 +12,7 @@
           "required": true
         },
         "additional": {
-          "model": [
-            "name",
-            {
-              "properties": ["name"]
-            }
-          ]
+          "model": ["name"]
         }
       },
       "name": "record",
