@@ -9,6 +9,7 @@ class AuthenticationError extends Error {
     };
   }
 }
+
 const userDatabase = {
   1: new User(1, {
     id: 1,
@@ -68,6 +69,7 @@ const schema = buildSchema(`
   type Mutation {
     createUser(input: UserInput): User
     updateUser(id: Int!, input: UserInput): User
+    deleteUser(id: Int!): User
     generateJwt(authProfileUuid: String!, userId: Int, username: String, password: String): Token
   }
 `);
@@ -91,6 +93,17 @@ const root = {
   },
   updateUser({ id, input }) {
     userDatabase[id].update(input);
+  },
+  deleteUser({ id }) {
+    const user = userDatabase[id];
+
+    if (!user) {
+      throw new Error('Record not found');
+    } else {
+      delete userDatabase[id];
+
+      return user;
+    }
   },
   generateJwt({ authProfileUuid, userId, username, password }) {
     const accessExpiresIn = 7200;
