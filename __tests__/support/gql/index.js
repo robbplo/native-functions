@@ -97,13 +97,9 @@ const root = {
   deleteUser({ id }) {
     const user = userDatabase[id];
 
-    if (!user) {
-      throw new Error('Record not found');
-    } else {
-      delete userDatabase[id];
+    delete userDatabase[id];
 
-      return user;
-    }
+    return user;
   },
   generateJwt({ authProfileUuid, userId, username, password }) {
     const accessExpiresIn = 7200;

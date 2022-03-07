@@ -1,7 +1,7 @@
 {
   "name": "deleteRecord",
   "description": "Delete a record",
-  "label": "Delete record",
+  "label": "Delete Record",
   "category": "CRUD",
   "icon": "DeleteIcon",
   "options": [
