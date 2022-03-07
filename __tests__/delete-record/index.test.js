@@ -17,18 +17,17 @@ describe('Native delete', () => {
   });
 
   test('It throws an error for non existing records', async () => {
-    expect.assertions(2);
+    expect.assertions(1);
 
     try {
       await deleteRecord({
         record: {
-          data: { id: -1 },
+          data: null,
           model: { name: 'User' },
         },
       });
-    } catch (errors) {
-      expect(errors.length).toEqual(1);
-      expect(errors[0].message).toBe('Record not found');
+    } catch (error) {
+      expect(error.message).toBe('Record not found');
     }
   });
 
