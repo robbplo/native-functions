@@ -23,7 +23,7 @@ const deleteRecord = async ({ record }) => {
       result: 'Record deleted',
     };
   } catch (error) {
-    if (error.message === "Cannot read property 'id' of null") {
+    if (error instanceof TypeError) {
       throw new Error('Record not found');
     } else {
       throw error;
