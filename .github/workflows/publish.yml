@@ -13,15 +13,19 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+<<<<<<< HEAD
       - run: npm install @betty-blocks/jaws
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: npm install -g @betty-blocks/cli
       - run: npm install shelljs
+=======
+>>>>>>> master
       - uses: actions/checkout@v2
       - uses: actions/github-script@v6
         with:
           script: |
+<<<<<<< HEAD
             const shell = require('shelljs');
             const Jaws = require('@betty-blocks/jaws');
             const FormData = require('form-data');
@@ -68,3 +72,6 @@ jobs:
 
               }
             });
+=======
+            console.log('Testing!!!');
+>>>>>>> master
