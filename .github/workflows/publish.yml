@@ -13,11 +13,11 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - run: npm install -g @betty-blocks/cli
+      - run: npm install shelljs
       - run: npm install @betty-blocks/jaws
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: npm install -g @betty-blocks/cli
-      - run: npm install shelljs
       - uses: actions/checkout@v2
       - uses: actions/github-script@v6
         with:
