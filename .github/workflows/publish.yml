@@ -15,9 +15,7 @@ jobs:
     steps:
       - run: npm install -g @betty-blocks/cli
       - run: npm install shelljs
-      - run: npm install @betty-blocks/jaws
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }} && npm install @betty-blocks/jaws
       - uses: actions/checkout@v2
       - uses: actions/github-script@v6
         with:
