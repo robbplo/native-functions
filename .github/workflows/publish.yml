@@ -1,0 +1,70 @@
+name: Publish
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - run: npm install @betty-blocks/jaws
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm install -g @betty-blocks/cli
+      - run: npm install shelljs
+      - uses: actions/checkout@v2
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const shell = require('shelljs');
+            const Jaws = require('@betty-blocks/jaws');
+            const FormData = require('form-data');
+
+            const run = (cmd) => shell.exec(cmd, {silent: true}).stdout.trim();
+            const cli = run('npm root -g') + '/@betty-blocks/cli/build';
+
+            const URL = '${{ secrets.API_URL }}';
+            const CONFIG = JSON.parse('${{ secrets.JAWS_SECRETS }}');
+
+            const {
+              functionDefinitions,
+              stringifyDefinitions,
+              zipFunctionDefinitions
+            } = require(`${cli}/functions/functionDefinitions.js`);
+
+            const functionsDir = run('pwd');
+            const functions = functionDefinitions(functionsDir);
+            const functionsJson = stringifyDefinitions(functions);
+            const zipFile = zipFunctionDefinitions(functionsDir);
+
+            const form = new FormData();
+            form.append('functions', functionsJson);
+            form.append('options', JSON.stringify({compile: false}));
+            form.append('file', fs.createReadStream(zipFile));
+
+            const jaws = Jaws.default.getInstance(CONFIG);
+
+            Object.keys(CONFIG).forEach(key => {
+              if (key != 'issuer') {
+
+                const url = URL.replace('{ZONE}', key) + '/artifacts/actions/native/functions';
+                const jwt = jaws.sign(key, { application_id: 'native' });
+
+                fetch(url, {
+                  method: 'POST',
+                  body: form,
+                  headers: {
+                    Authorization: `Bearer ${jwt}`,
+                  },
+                }).then(response => {
+                  console.log(response);
+                });
+
+              }
+            });
