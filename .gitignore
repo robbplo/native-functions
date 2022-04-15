@@ -10,6 +10,7 @@ config.*.json
 .nvmrc
 .tool-versions
 .idea
+.secrets
 
 npm-debug.log*
 yarn-debug.log*
