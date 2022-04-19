@@ -1,7 +1,7 @@
 {
   "description": "Log message to applications log",
   "name": "log",
-  "label": "Log",
+  "label": "Log Message",
   "category": "Misc",
   "icon": "LightningIcon",
   "options": [
