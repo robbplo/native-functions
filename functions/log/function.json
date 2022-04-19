@@ -1,0 +1,22 @@
+{
+  "description": "Log message to applications log",
+  "name": "log",
+  "label": "Log",
+  "category": "Misc",
+  "icon": "CreateIcon",
+  "options": [
+    {
+      "meta": {
+        "type": "Text"
+      },
+      "name": "message",
+      "label": "Message",
+      "info": "The message that you want to log",
+      "advanced": false,
+      "configuration": {
+        "placeholder": "Testing"
+      }
+    }
+  ],
+  "yields": "NONE"
+}
