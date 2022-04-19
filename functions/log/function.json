@@ -12,10 +12,7 @@
       "name": "message",
       "label": "Message",
       "info": "The message that you want to log",
-      "advanced": false,
-      "configuration": {
-        "placeholder": ""
-      }
+      "advanced": false
     }
   ],
   "yields": "NONE"
