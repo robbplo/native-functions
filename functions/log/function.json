@@ -3,7 +3,7 @@
   "name": "log",
   "label": "Log",
   "category": "Misc",
-  "icon": "CreateIcon",
+  "icon": "LightningIcon",
   "options": [
     {
       "meta": {
@@ -14,7 +14,7 @@
       "info": "The message that you want to log",
       "advanced": false,
       "configuration": {
-        "placeholder": "Testing"
+        "placeholder": ""
       }
     }
   ],
