@@ -1,8 +1,15 @@
 export const now = () =>
   new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-const getValueBasedOnPropertyKind = (kind, value) =>
-  kind === 'BELONGS_TO' && value ? value.id : value;
+const getValueBasedOnPropertyKind = (kind, value) => {
+  // eslint-disable-next-line no-console
+  console.log({
+    kind,
+    value,
+    result: kind === 'BELONGS_TO' && value ? value.id : value,
+  });
+  return kind === 'BELONGS_TO' && value ? value.id : value;
+};
 
 export const parseAssignedProperties = (properties) =>
   properties.reduce((output, property) => {
