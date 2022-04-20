@@ -1,16 +1,19 @@
 export const now = () =>
   new Date().toISOString().slice(0, 19).replace('T', ' ');
 
+const getValueBasedOnPropertyKind = (kind, value) =>
+  kind === 'BELONGS_TO' && value ? value.id : value;
+
 export const parseAssignedProperties = (properties) =>
   properties.reduce((output, property) => {
     const {
-      key: [{ name: propertyName }],
+      key: [{ name, kind }],
       value,
     } = property;
 
     return {
       ...output,
-      [propertyName]: value,
+      [name]: getValueBasedOnPropertyKind(kind, value),
     };
   }, {});
 
