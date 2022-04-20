@@ -54,11 +54,6 @@ jobs:
             const nativeFile = appFile.replace('app', 'native');
             run(`mv ${appFile} ${nativeFile}`);
 
-            const formData = new FormData();
-            formData.append('functions', functionsJson);
-            formData.append('options', JSON.stringify({compile: false}));
-            formData.append('file', fs.createReadStream(nativeFile));
-
             const currentBranch = '${{ steps.branch.outputs.branch }}';
 
             Object.keys(zones).forEach(zone => {
@@ -67,6 +62,11 @@ jobs:
               const zoneBranch = zone.match(/(edge|acceptance)/) ? zone : 'master';
 
               if (currentBranch === zoneBranch) {
+                const formData = new FormData();
+                formData.append('functions', functionsJson);
+                formData.append('options', JSON.stringify({compile: false}));
+                formData.append('file', fs.createReadStream(nativeFile));
+
                 fetch(url, {
                   method: 'POST',
                   body: formData,
