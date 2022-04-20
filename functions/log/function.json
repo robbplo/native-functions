@@ -1,0 +1,19 @@
+{
+  "description": "Log message to the application logs",
+  "name": "log",
+  "label": "Log Message",
+  "category": "Debugging",
+  "icon": "LightningIcon",
+  "options": [
+    {
+      "meta": {
+        "type": "Text"
+      },
+      "name": "message",
+      "label": "Message",
+      "info": "The message that you want to log",
+      "advanced": false
+    }
+  ],
+  "yields": "NONE"
+}
