@@ -28,7 +28,9 @@ const getQueryKeys = (properties) =>
     .join('\n');
 
 const getValueBasedOnPropertyKind = (kind, value) =>
-  kind === 'BELONGS_TO' && value ? value.id : value;
+  kind === 'BELONGS_TO' && value && typeof value === 'object'
+    ? value.id
+    : value;
 
 export const parseAssignedProperties = (properties) =>
   properties.reduce((output, property) => {
