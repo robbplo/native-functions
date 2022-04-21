@@ -38,7 +38,7 @@ class User {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
-    this.city = cityDatabase[city];
+    this.city = cityDatabase[city] || this.city;
     return this;
   }
 }
