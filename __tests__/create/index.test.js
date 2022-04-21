@@ -30,6 +30,18 @@ describe('Native create', () => {
         ],
         value: 30,
       },
+      {
+        key: [
+          {
+            name: 'city',
+            kind: 'BELONGS_TO',
+          },
+        ],
+        value: {
+          id: 1,
+          name: 'Amsterdam',
+        },
+      },
     ];
 
     const { as: result } = await create({ model: { name: 'User' }, mapping });
@@ -39,6 +51,10 @@ describe('Native create', () => {
       firstName: 'John',
       lastName: 'Doe',
       age: 30,
+      city: {
+        id: 1,
+        name: 'Amsterdam',
+      },
     });
   });
 

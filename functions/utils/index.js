@@ -55,8 +55,6 @@ export const fetchRecord = async (modelName, id, properties = []) => {
     }
   `;
 
-  console.log({ query });
-
   const { data, errors } = await gql(query, { where: { id: { eq: id } } });
 
   if (errors) {

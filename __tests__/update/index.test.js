@@ -28,6 +28,18 @@ const mapping = [
     ],
     value: 40,
   },
+  {
+    key: [
+      {
+        name: 'city',
+        kind: 'BELONGS_TO',
+      },
+    ],
+    value: {
+      id: 2,
+      name: 'London',
+    },
+  },
 ];
 
 describe('Native update', () => {
@@ -43,6 +55,10 @@ describe('Native update', () => {
       firstName: 'Doe',
       lastName: 'John',
       age: 40,
+      city: {
+        id: 2,
+        name: 'London',
+      },
     });
   });
 
