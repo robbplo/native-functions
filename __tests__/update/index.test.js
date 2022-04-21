@@ -5,6 +5,7 @@ const mapping = [
     key: [
       {
         name: 'firstName',
+        kind: 'STRING',
       },
     ],
     value: 'Doe',
@@ -13,6 +14,7 @@ const mapping = [
     key: [
       {
         name: 'lastName',
+        kind: 'STRING',
       },
     ],
     value: 'John',
@@ -21,6 +23,7 @@ const mapping = [
     key: [
       {
         name: 'age',
+        kind: 'INTEGER',
       },
     ],
     value: 40,

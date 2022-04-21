@@ -7,6 +7,7 @@ describe('Native create', () => {
         key: [
           {
             name: 'firstName',
+            kind: 'STRING',
           },
         ],
         value: 'John',
@@ -15,6 +16,7 @@ describe('Native create', () => {
         key: [
           {
             name: 'lastName',
+            kind: 'STRING',
           },
         ],
         value: 'Doe',
@@ -23,6 +25,7 @@ describe('Native create', () => {
         key: [
           {
             name: 'age',
+            kind: 'INTEGER',
           },
         ],
         value: 30,

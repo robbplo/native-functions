@@ -29,7 +29,7 @@ const update = async ({
     throw errors;
   }
 
-  const updatedRecord = await fetchRecord(modelName, mapping, id);
+  const updatedRecord = await fetchRecord(modelName, id, mapping);
 
   return {
     as: updatedRecord,

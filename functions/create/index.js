@@ -26,7 +26,7 @@ const create = async ({ model: { name: modelName }, mapping }) => {
   const {
     [mutationName]: { id },
   } = data;
-  const createdRecord = await fetchRecord(modelName, mapping, id);
+  const createdRecord = await fetchRecord(modelName, id, mapping);
 
   return {
     as: createdRecord,

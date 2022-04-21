@@ -1,11 +1,11 @@
 export const now = () =>
   new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-const getQueryKeys = (properties) => {
+const getQueryKeys = (properties) =>
   properties
     .map((property) => {
       const {
-        key: [kind, name],
+        key: [{ kind, name }],
         value,
       } = property;
 
@@ -25,8 +25,7 @@ const getQueryKeys = (properties) => {
 
       return name;
     })
-    .join('/n');
-};
+    .join('\n');
 
 const getValueBasedOnPropertyKind = (kind, value) =>
   kind === 'BELONGS_TO' && value ? value.id : value;
@@ -44,7 +43,7 @@ export const parseAssignedProperties = (properties) =>
     };
   }, {});
 
-export const fetchRecord = async (modelName, properties, id) => {
+export const fetchRecord = async (modelName, id, properties = []) => {
   const queryName = `one${modelName}`;
 
   const query = `
