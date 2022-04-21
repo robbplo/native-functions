@@ -2,7 +2,7 @@ export const now = () =>
   new Date().toISOString().slice(0, 19).replace('T', ' ');
 
 const isRecord = (value) =>
-  typeof value === 'object' && !Array.isArray(value) && value;
+  value && typeof value === 'object' && !Array.isArray(value);
 
 const getQueryKeys = (properties) =>
   properties
