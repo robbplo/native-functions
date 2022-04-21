@@ -29,8 +29,7 @@ const update = async ({
     throw errors;
   }
 
-  const properties = Object.keys(input);
-  const updatedRecord = await fetchRecord(modelName, properties, id);
+  const updatedRecord = await fetchRecord(modelName, mapping, id);
 
   return {
     as: updatedRecord,
