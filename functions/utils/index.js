@@ -1,6 +1,9 @@
 export const now = () =>
   new Date().toISOString().slice(0, 19).replace('T', ' ');
 
+const isRecord = (value) =>
+  value && typeof value === 'object' && !Array.isArray(value);
+
 const getQueryKeys = (properties) =>
   properties
     .map((property) => {
@@ -15,7 +18,7 @@ const getQueryKeys = (properties) =>
         }`;
       }
 
-      if (kind === 'BELONGS_TO' && typeof value === 'object') {
+      if (kind === 'BELONGS_TO' && isRecord(value)) {
         const keys = Object.keys(value);
 
         return `${name} {
@@ -28,7 +31,7 @@ const getQueryKeys = (properties) =>
     .join('\n');
 
 const getValueBasedOnPropertyKind = (kind, value) =>
-  kind === 'BELONGS_TO' && value ? value.id : value;
+  kind === 'BELONGS_TO' && isRecord(value) ? value.id : value;
 
 export const parseAssignedProperties = (properties) =>
   properties.reduce((output, property) => {
@@ -54,8 +57,6 @@ export const fetchRecord = async (modelName, id, properties = []) => {
       }
     }
   `;
-
-  console.log({ query });
 
   const { data, errors } = await gql(query, { where: { id: { eq: id } } });
 

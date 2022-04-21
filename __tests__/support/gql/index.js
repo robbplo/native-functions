@@ -18,6 +18,7 @@ const userDatabase = {
     age: 30,
     username: 'test@test.test',
     password: 'test1234',
+    city: null,
   }),
 };
 
@@ -34,6 +35,12 @@ const schema = buildSchema(`
     age: Int
     createdAt: String
     updatedAt: String
+    city: City
+  }
+
+  type City {
+    id: Int!
+    name: String!
   }
 
   type Token {
@@ -52,6 +59,7 @@ const schema = buildSchema(`
     age: Int
     createdAt: String
     updatedAt: String
+    city: Int
   }
 
   input IdEquals {
