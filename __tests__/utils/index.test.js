@@ -1,34 +1,37 @@
 import { fetchRecord, parseAssignedProperties } from '../../functions/utils';
 
+const properties = [
+  {
+    key: [
+      {
+        name: 'firstName',
+        kind: 'STRING',
+      },
+    ],
+    value: 'John',
+  },
+  {
+    key: [
+      {
+        name: 'lastName',
+        kind: 'STRING',
+      },
+    ],
+    value: 'Doe',
+  },
+  {
+    key: [
+      {
+        name: 'age',
+        kind: 'INTEGER',
+      },
+    ],
+    value: 30,
+  },
+];
+
 describe('Utility functions', () => {
   test('parseAssignedProperties', () => {
-    const properties = [
-      {
-        key: [
-          {
-            name: 'firstName',
-          },
-        ],
-        value: 'John',
-      },
-      {
-        key: [
-          {
-            name: 'lastName',
-          },
-        ],
-        value: 'Doe',
-      },
-      {
-        key: [
-          {
-            name: 'age',
-          },
-        ],
-        value: 30,
-      },
-    ];
-
     expect(parseAssignedProperties(properties)).toStrictEqual({
       firstName: 'John',
       lastName: 'Doe',
@@ -37,11 +40,7 @@ describe('Utility functions', () => {
   });
 
   test('fetchRecord returns an existing record', async () => {
-    const result = await fetchRecord(
-      'User',
-      ['firstName', 'lastName', 'age'],
-      1,
-    );
+    const result = await fetchRecord('User', 1, properties);
 
     expect(result).toMatchObject({
       id: 1,
@@ -52,11 +51,7 @@ describe('Utility functions', () => {
   });
 
   test('fetchRecord returns an error when no record is found', async () => {
-    const result = await fetchRecord(
-      'User',
-      ['firstName', 'lastName', 'age'],
-      -1,
-    );
+    const result = await fetchRecord('User', -1, properties);
 
     expect(result).toBeNull();
   });
@@ -65,7 +60,7 @@ describe('Utility functions', () => {
     expect.assertions(1);
 
     try {
-      await fetchRecord('InvalidModel', [], 0);
+      await fetchRecord('InvalidModel', 0);
     } catch ({ message }) {
       expect(message).toContain('Unknown type');
     }
