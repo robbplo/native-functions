@@ -1,27 +1,59 @@
 export const now = () =>
   new Date().toISOString().slice(0, 19).replace('T', ' ');
 
+const isRecord = (value) =>
+  value && typeof value === 'object' && !Array.isArray(value);
+
+const getQueryKeys = (properties) =>
+  properties
+    .map((property) => {
+      const {
+        key: [{ kind, name }],
+        value,
+      } = property;
+
+      if (kind === 'BELONGS_TO' && typeof value === 'number') {
+        return `${name} {
+          id\n
+        }`;
+      }
+
+      if (kind === 'BELONGS_TO' && isRecord(value)) {
+        const keys = Object.keys(value);
+
+        return `${name} {
+          ${keys.map((key) => key).join('\n')}
+        }`;
+      }
+
+      return name;
+    })
+    .join('\n');
+
+const getValueBasedOnPropertyKind = (kind, value) =>
+  kind === 'BELONGS_TO' && isRecord(value) ? value.id : value;
+
 export const parseAssignedProperties = (properties) =>
   properties.reduce((output, property) => {
     const {
-      key: [{ name: propertyName }],
+      key: [{ name, kind }],
       value,
     } = property;
 
     return {
       ...output,
-      [propertyName]: value,
+      [name]: getValueBasedOnPropertyKind(kind, value),
     };
   }, {});
 
-export const fetchRecord = async (modelName, properties, id) => {
+export const fetchRecord = async (modelName, id, properties = []) => {
   const queryName = `one${modelName}`;
 
   const query = `
     query($where: ${modelName}FilterInput) {
       ${queryName}(where: $where) {
         id
-        ${properties.join('\n')}
+        ${getQueryKeys(properties)}
       }
     }
   `;

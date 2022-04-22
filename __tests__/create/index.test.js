@@ -1,34 +1,37 @@
 import create from '../../functions/create';
 
-describe('Native create', () => {
-  test('It creates a record', async () => {
-    const mapping = [
+const mapping = [
+  {
+    key: [
       {
-        key: [
-          {
-            name: 'firstName',
-          },
-        ],
-        value: 'John',
+        name: 'firstName',
+        kind: 'STRING',
       },
+    ],
+    value: 'John',
+  },
+  {
+    key: [
       {
-        key: [
-          {
-            name: 'lastName',
-          },
-        ],
-        value: 'Doe',
+        name: 'lastName',
+        kind: 'STRING',
       },
+    ],
+    value: 'Doe',
+  },
+  {
+    key: [
       {
-        key: [
-          {
-            name: 'age',
-          },
-        ],
-        value: 30,
+        name: 'age',
+        kind: 'INTEGER',
       },
-    ];
+    ],
+    value: 30,
+  },
+];
 
+describe('Native create', () => {
+  test('It creates a record with primitive properties', async () => {
     const { as: result } = await create({ model: { name: 'User' }, mapping });
 
     expect(result).toHaveProperty('id');
@@ -36,6 +39,66 @@ describe('Native create', () => {
       firstName: 'John',
       lastName: 'Doe',
       age: 30,
+    });
+  });
+
+  test('It creates a record and sets a belongs to relation based on a record variable', async () => {
+    const { as: result } = await create({
+      model: { name: 'User' },
+      mapping: [
+        ...mapping,
+        {
+          key: [
+            {
+              name: 'city',
+              kind: 'BELONGS_TO',
+            },
+          ],
+          value: {
+            id: 1,
+            name: 'Amsterdam',
+          },
+        },
+      ],
+    });
+
+    expect(result).toHaveProperty('id');
+    expect(result).toMatchObject({
+      firstName: 'John',
+      lastName: 'Doe',
+      age: 30,
+      city: {
+        id: 1,
+        name: 'Amsterdam',
+      },
+    });
+  });
+
+  test('It creates a record and sets a belongs to relation based on a number variable', async () => {
+    const { as: result } = await create({
+      model: { name: 'User' },
+      mapping: [
+        ...mapping,
+        {
+          key: [
+            {
+              name: 'city',
+              kind: 'BELONGS_TO',
+            },
+          ],
+          value: 1,
+        },
+      ],
+    });
+
+    expect(result).toHaveProperty('id');
+    expect(result).toMatchObject({
+      firstName: 'John',
+      lastName: 'Doe',
+      age: 30,
+      city: {
+        id: 1,
+      },
     });
   });
 

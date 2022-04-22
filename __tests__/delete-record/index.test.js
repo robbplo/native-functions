@@ -10,7 +10,7 @@ describe('Native delete', () => {
       },
     });
 
-    const record = await fetchRecord('User', ['id'], 1);
+    const record = await fetchRecord('User', 1);
 
     expect(result).toBe('Record deleted');
     expect(record).toBeNull();
