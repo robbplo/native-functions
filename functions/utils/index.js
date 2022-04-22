@@ -1,3 +1,5 @@
+import { RelationKind } from './contants';
+
 export const now = () =>
   new Date().toISOString().slice(0, 19).replace('T', ' ');
 
@@ -12,26 +14,55 @@ const getQueryKeys = (properties) =>
         value,
       } = property;
 
-      if (kind === 'BELONGS_TO' && typeof value === 'number') {
-        return `${name} {
-          id\n
-        }`;
+      switch (true) {
+        case kind === RelationKind.BELONGS_TO && typeof value === 'number':
+        case kind === RelationKind.HAS_AND_BELONGS_TO_MANY &&
+          Array.isArray(value) &&
+          typeof value[0] === 'number':
+        case kind === RelationKind.HAS_MANY &&
+          Array.isArray(value) &&
+          typeof value[0] === 'number':
+          return `${name} {
+            id\n
+          }`;
+
+        case kind === RelationKind.BELONGS_TO && isRecord(value): {
+          const keys = Object.keys(value);
+          return `${name} {
+            ${keys.map((key) => key).join('\n')}
+          }`;
+        }
+
+        case kind === RelationKind.HAS_AND_BELONGS_TO_MANY &&
+          Array.isArray(value):
+        case kind === RelationKind.HAS_MANY && Array.isArray(value): {
+          const keys = Object.keys(value[0]);
+          return `${name} {
+            ${keys.map((key) => key).join('\n')}
+          }`;
+        }
+
+        default:
+          return name;
       }
-
-      if (kind === 'BELONGS_TO' && isRecord(value)) {
-        const keys = Object.keys(value);
-
-        return `${name} {
-          ${keys.map((key) => key).join('\n')}
-        }`;
-      }
-
-      return name;
     })
     .join('\n');
 
-const getValueBasedOnPropertyKind = (kind, value) =>
-  kind === 'BELONGS_TO' && isRecord(value) ? value.id : value;
+const getValueBasedOnPropertyKind = (kind, value) => {
+  switch (true) {
+    case kind === RelationKind.BELONGS_TO && isRecord(value):
+      return value.id;
+
+    case kind === RelationKind.HAS_AND_BELONGS_TO_MANY && Array.isArray(value):
+    case kind === RelationKind.HAS_MANY && Array.isArray(value): {
+      const recordIds = value.map((val) => (isRecord(val) ? val.id : val));
+      return { id: recordIds };
+    }
+
+    default:
+      return value;
+  }
+};
 
 export const parseAssignedProperties = (properties) =>
   properties.reduce((output, property) => {
