@@ -6,6 +6,13 @@ export const now = () =>
 const isRecord = (value) =>
   value && typeof value === 'object' && !Array.isArray(value);
 
+const isCollection = (value) =>
+  Array.isArray(value) && (isRecord(value) || typeof value[0] === 'undefined');
+
+const isNumberArray = (value) =>
+  Array.isArray(value) &&
+  (typeof value[0] === 'number' || typeof value[0] === 'undefined');
+
 const getQueryKeys = (properties) =>
   properties
     .map((property) => {
@@ -17,11 +24,8 @@ const getQueryKeys = (properties) =>
       switch (true) {
         case kind === RelationKind.BELONGS_TO && typeof value === 'number':
         case kind === RelationKind.HAS_AND_BELONGS_TO_MANY &&
-          Array.isArray(value) &&
-          typeof value[0] === 'number':
-        case kind === RelationKind.HAS_MANY &&
-          Array.isArray(value) &&
-          typeof value[0] === 'number':
+          isNumberArray(value):
+        case kind === RelationKind.HAS_MANY && isNumberArray(value):
           return `${name} {
             id\n
           }`;
@@ -34,9 +38,9 @@ const getQueryKeys = (properties) =>
         }
 
         case kind === RelationKind.HAS_AND_BELONGS_TO_MANY &&
-          Array.isArray(value):
-        case kind === RelationKind.HAS_MANY && Array.isArray(value): {
-          const keys = Object.keys(value[0]);
+          isCollection(value):
+        case kind === RelationKind.HAS_MANY && isCollection(value): {
+          const keys = value[0] ? Object.keys(value[0]) : ['id'];
           return `${name} {
             ${keys.map((key) => key).join('\n')}
           }`;
