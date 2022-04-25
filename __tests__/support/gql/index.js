@@ -19,6 +19,7 @@ const userDatabase = {
     username: 'test@test.test',
     password: 'test1234',
     city: null,
+    tasks: { id: [] },
   }),
 };
 
@@ -36,9 +37,15 @@ const schema = buildSchema(`
     createdAt: String
     updatedAt: String
     city: City
+    tasks: [Task]
   }
 
   type City {
+    id: Int!
+    name: String!
+  }
+
+  type Task {
     id: Int!
     name: String!
   }
@@ -53,6 +60,10 @@ const schema = buildSchema(`
     refreshToken: String
   }
 
+  input UserTasksInput {
+    id: [Int] 
+  }
+
   input UserInput {
     firstName: String
     lastName: String
@@ -60,6 +71,7 @@ const schema = buildSchema(`
     createdAt: String
     updatedAt: String
     city: Int
+    tasks: UserTasksInput
   }
 
   input IdEquals {

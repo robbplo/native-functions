@@ -102,6 +102,66 @@ describe('Native create', () => {
     });
   });
 
+  test('It creates a record and sets a has many or habtm relation based on a collection variable', async () => {
+    const { as: result } = await create({
+      model: { name: 'User' },
+      mapping: [
+        ...mapping,
+        {
+          key: [
+            {
+              name: 'tasks',
+              kind: 'HAS_MANY',
+            },
+          ],
+          value: [{ id: 1, name: 'Write tests' }],
+        },
+      ],
+    });
+    expect(result).toHaveProperty('id');
+    expect(result).toMatchObject({
+      firstName: 'John',
+      lastName: 'Doe',
+      age: 30,
+      tasks: [
+        {
+          id: 1,
+          name: 'Write tests',
+        },
+      ],
+    });
+  });
+
+  test('It creates a record and sets a has many or habtm relation based on a number array variable', async () => {
+    const { as: result } = await create({
+      model: { name: 'User' },
+      mapping: [
+        ...mapping,
+        {
+          key: [
+            {
+              name: 'tasks',
+              kind: 'HAS_MANY',
+            },
+          ],
+          value: [1],
+        },
+      ],
+    });
+
+    expect(result).toHaveProperty('id');
+    expect(result).toMatchObject({
+      firstName: 'John',
+      lastName: 'Doe',
+      age: 30,
+      tasks: [
+        {
+          id: 1,
+        },
+      ],
+    });
+  });
+
   test('It throws an error for invalid input', async () => {
   test.skip('It throws an error for invalid input', async () => {
     expect.assertions(1);
