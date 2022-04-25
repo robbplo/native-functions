@@ -7,11 +7,34 @@ const isRecord = (value) =>
   value && typeof value === 'object' && !Array.isArray(value);
 
 const isCollection = (value) =>
-  Array.isArray(value) && (isRecord(value) || typeof value[0] === 'undefined');
-
-const isNumberArray = (value) =>
   Array.isArray(value) &&
-  (typeof value[0] === 'number' || typeof value[0] === 'undefined');
+  (isRecord(value[0]) || typeof value[0] === 'undefined');
+
+const parseBelongsTo = (name, value) => {
+  if (isRecord(value) && Object.keys(value).length > 0) {
+    const keys = Object.keys(value);
+    return `${name} {
+      ${keys.map((key) => key).join('\n')}
+    }`;
+  }
+
+  return `${name} {
+    id\n
+  }`;
+};
+
+const parseHasManyAndHasAndBelongsToMany = (name, value) => {
+  if (isCollection(value) && Object.keys(value[0]) > 0) {
+    const keys = Object.keys(value[0]);
+    return `${name} {
+      ${keys.map((key) => key).join('\n')}
+    }`;
+  }
+
+  return `${name} {
+    id\n
+  }`;
+};
 
 const getQueryKeys = (properties) =>
   properties
@@ -21,30 +44,12 @@ const getQueryKeys = (properties) =>
         value,
       } = property;
 
-      switch (true) {
-        case kind === RelationKind.BELONGS_TO && typeof value === 'number':
-        case kind === RelationKind.HAS_AND_BELONGS_TO_MANY &&
-          isNumberArray(value):
-        case kind === RelationKind.HAS_MANY && isNumberArray(value):
-          return `${name} {
-            id\n
-          }`;
-
-        case kind === RelationKind.BELONGS_TO && isRecord(value): {
-          const keys = Object.keys(value);
-          return `${name} {
-            ${keys.map((key) => key).join('\n')}
-          }`;
-        }
-
-        case kind === RelationKind.HAS_AND_BELONGS_TO_MANY &&
-          isCollection(value):
-        case kind === RelationKind.HAS_MANY && isCollection(value): {
-          const keys = value[0] ? Object.keys(value[0]) : ['id'];
-          return `${name} {
-            ${keys.map((key) => key).join('\n')}
-          }`;
-        }
+      switch (kind) {
+        case RelationKind.BELONGS_TO:
+          return parseBelongsTo(name, value);
+        case RelationKind.HAS_MANY:
+        case RelationKind.HAS_AND_BELONGS_TO_MANY:
+          return parseHasManyAndHasAndBelongsToMany(name, value);
 
         default:
           return name;
@@ -52,17 +57,24 @@ const getQueryKeys = (properties) =>
     })
     .join('\n');
 
-const getValueBasedOnPropertyKind = (kind, value) => {
-  switch (true) {
-    case kind === RelationKind.BELONGS_TO && isRecord(value):
-      return value.id;
+const belongsToValue = (value) => (isRecord(value) ? value.id : value);
 
-    case kind === RelationKind.HAS_AND_BELONGS_TO_MANY && Array.isArray(value):
-    case kind === RelationKind.HAS_MANY && Array.isArray(value): {
-      const recordIds = value.map((val) => (isRecord(val) ? val.id : val));
-      return { id: recordIds };
-    }
+const hasManyOrHasAndBelongsToManyValue = (value) => {
+  if (Array.isArray(value)) {
+    const recordIds = value.map((val) => (isRecord(val) ? val.id : val));
+    return { id: recordIds };
+  }
 
+  return value;
+};
+
+const getAssignedValue = (kind, value) => {
+  switch (kind) {
+    case RelationKind.BELONGS_TO:
+      return belongsToValue(value);
+    case RelationKind.HAS_MANY:
+    case RelationKind.HAS_AND_BELONGS_TO_MANY:
+      return hasManyOrHasAndBelongsToManyValue(value);
     default:
       return value;
   }
@@ -77,7 +89,7 @@ export const parseAssignedProperties = (properties) =>
 
     return {
       ...output,
-      [name]: getValueBasedOnPropertyKind(kind, value),
+      [name]: getAssignedValue(kind, value),
     };
   }, {});
 
