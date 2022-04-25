@@ -33,6 +33,10 @@ const create = async ({ model: { name: modelName }, mapping }) => {
     };
   } catch (error) {
     console.log({ input, error });
+
+    return {
+      as: error,
+    };
   }
 };
 
