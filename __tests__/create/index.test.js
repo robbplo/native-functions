@@ -163,7 +163,6 @@ describe('Native create', () => {
   });
 
   test('It throws an error for invalid input', async () => {
-  test.skip('It throws an error for invalid input', async () => {
     expect.assertions(1);
 
     try {

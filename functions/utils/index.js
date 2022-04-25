@@ -24,7 +24,7 @@ const parseBelongsTo = (name, value) => {
 };
 
 const parseHasManyAndHasAndBelongsToMany = (name, value) => {
-  if (isCollection(value) && Object.keys(value[0]) > 0) {
+  if (isCollection(value) && Object.keys(value[0]).length > 0) {
     const keys = Object.keys(value[0]);
     return `${name} {
       ${keys.map((key) => key).join('\n')}
@@ -104,8 +104,6 @@ export const fetchRecord = async (modelName, id, properties = []) => {
       }
     }
   `;
-
-  console.log({ query });
 
   const { data, errors } = await gql(query, { where: { id: { eq: id } } });
 
