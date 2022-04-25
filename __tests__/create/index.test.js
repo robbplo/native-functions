@@ -102,6 +102,32 @@ describe('Native create', () => {
     });
   });
 
+  test('It creates a record and sets a belongs to relation based on a city id that doesnt exist', async () => {
+    const { as: result } = await create({
+      model: { name: 'User' },
+      mapping: [
+        ...mapping,
+        {
+          key: [
+            {
+              name: 'city',
+              kind: 'BELONGS_TO',
+            },
+          ],
+          value: 55,
+        },
+      ],
+    });
+
+    expect(result).toHaveProperty('id');
+    expect(result).toMatchObject({
+      firstName: 'John',
+      lastName: 'Doe',
+      age: 30,
+      city: null,
+    });
+  });
+
   test('It creates a record and sets a has many or habtm relation based on a collection variable', async () => {
     const { as: result } = await create({
       model: { name: 'User' },
@@ -159,6 +185,32 @@ describe('Native create', () => {
           id: 1,
         },
       ],
+    });
+  });
+
+  test('It creates a record and sets an has many or habtm relation based on an empty array ', async () => {
+    const { as: result } = await create({
+      model: { name: 'User' },
+      mapping: [
+        ...mapping,
+        {
+          key: [
+            {
+              name: 'tasks',
+              kind: 'HAS_MANY',
+            },
+          ],
+          value: [],
+        },
+      ],
+    });
+
+    expect(result).toHaveProperty('id');
+    expect(result).toMatchObject({
+      firstName: 'John',
+      lastName: 'Doe',
+      age: 30,
+      tasks: [],
     });
   });
 
