@@ -49,11 +49,16 @@ class User {
     }
   }
 
-  update({ firstName, lastName, age, city }) {
+  update({ firstName, lastName, age, city, tasks }) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
-    this.city = cityDatabase[city] || this.city;
+    this.city = cityDatabase[city];
+
+    if (tasks && tasks.id) {
+      this.tasks = taskDatabase.filter((task) => tasks.id.includes(task.id));
+    }
+
     return this;
   }
 }
