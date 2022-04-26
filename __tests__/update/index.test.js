@@ -108,7 +108,7 @@ describe('Native update', () => {
     });
   });
 
-  test('It updates a belongs to relation based on a city id that doesnt exist', async () => {
+  test('It updates a belongs to relation based on a id that doesnt exist', async () => {
     const { as: result } = await update({
       selectedRecord: {
         data: { id: 1 },
@@ -135,7 +135,7 @@ describe('Native update', () => {
     });
   });
 
-  test('It updates a has many or habtm relation based on a collection variable', async () => {
+  test('It updates a has many relation based on a collection variable', async () => {
     const { as: result } = await update({
       selectedRecord: {
         data: { id: 1 },
@@ -168,7 +168,7 @@ describe('Native update', () => {
     });
   });
 
-  test('It updates a has many or habtm relation based on a number array variable', async () => {
+  test('It updates a has and belongs to many relation based on a number array variable', async () => {
     const { as: result } = await update({
       selectedRecord: {
         data: { id: 1 },

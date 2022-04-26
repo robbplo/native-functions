@@ -102,7 +102,7 @@ describe('Native create', () => {
     });
   });
 
-  test('It creates a record and sets a belongs to relation based on a city id that doesnt exist', async () => {
+  test('It creates a record and sets a belongs to relation based on a id that doesnt exist', async () => {
     const { as: result } = await create({
       model: { name: 'User' },
       mapping: [
@@ -128,7 +128,7 @@ describe('Native create', () => {
     });
   });
 
-  test('It creates a record and sets a has many or habtm relation based on a collection variable', async () => {
+  test('It creates a record and sets a has and belongs to many relation based on a collection variable', async () => {
     const { as: result } = await create({
       model: { name: 'User' },
       mapping: [
@@ -137,7 +137,7 @@ describe('Native create', () => {
           key: [
             {
               name: 'tasks',
-              kind: 'HAS_MANY',
+              kind: 'HAS_AND_BELONGS_TO_MANY',
             },
           ],
           value: [{ id: 1, name: 'Write tests' }],
@@ -158,7 +158,7 @@ describe('Native create', () => {
     });
   });
 
-  test('It creates a record and sets a has many or habtm relation based on a number array variable', async () => {
+  test('It creates a record and sets a has many relation based on a number array variable', async () => {
     const { as: result } = await create({
       model: { name: 'User' },
       mapping: [
