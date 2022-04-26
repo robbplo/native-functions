@@ -4,14 +4,15 @@ export const now = () =>
   new Date().toISOString().slice(0, 19).replace('T', ' ');
 
 const isRecord = (value) =>
-  value && typeof value === 'object' && !Array.isArray(value);
+  value &&
+  typeof value === 'object' &&
+  !Array.isArray(value) &&
+  Object.keys(value).length > 0;
 
-const isCollection = (value) =>
-  Array.isArray(value) &&
-  (isRecord(value[0]) || typeof value[0] === 'undefined');
+const isCollection = (value) => Array.isArray(value) && isRecord(value[0]);
 
 const parseBelongsTo = (name, value) => {
-  if (isRecord(value) && Object.keys(value).length > 0) {
+  if (isRecord(value)) {
     const keys = Object.keys(value);
     return `${name} {
       ${keys.map((key) => key).join('\n')}
@@ -24,7 +25,7 @@ const parseBelongsTo = (name, value) => {
 };
 
 const parseHasManyAndHasAndBelongsToMany = (name, value) => {
-  if (isCollection(value) && Object.keys(value[0]) > 0) {
+  if (isCollection(value)) {
     const keys = Object.keys(value[0]);
     return `${name} {
       ${keys.map((key) => key).join('\n')}
@@ -104,8 +105,6 @@ export const fetchRecord = async (modelName, id, properties = []) => {
       }
     }
   `;
-
-  console.log({ query });
 
   const { data, errors } = await gql(query, { where: { id: { eq: id } } });
 
