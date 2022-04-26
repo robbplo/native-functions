@@ -1,4 +1,5 @@
 import City from '../city';
+import Task from '../task';
 
 const cityDatabase = {
   1: new City(1, {
@@ -8,6 +9,15 @@ const cityDatabase = {
     name: 'London',
   }),
 };
+
+const taskDatabase = [
+  new Task(1, {
+    name: 'Write tests',
+  }),
+  new Task(2, {
+    name: 'Setup pipeline',
+  }),
+];
 
 class User {
   constructor(
@@ -21,6 +31,7 @@ class User {
       username,
       password,
       city,
+      tasks,
     },
   ) {
     this.id = id;
@@ -32,13 +43,22 @@ class User {
     this.username = username;
     this.password = password;
     this.city = cityDatabase[city];
+
+    if (tasks && tasks.id) {
+      this.tasks = taskDatabase.filter((task) => tasks.id.includes(task.id));
+    }
   }
 
-  update({ firstName, lastName, age, city }) {
+  update({ firstName, lastName, age, city, tasks }) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
-    this.city = cityDatabase[city] || this.city;
+    this.city = cityDatabase[city];
+
+    if (tasks && tasks.id) {
+      this.tasks = taskDatabase.filter((task) => tasks.id.includes(task.id));
+    }
+
     return this;
   }
 }
