@@ -18,7 +18,6 @@ const create = async ({ model: { name: modelName }, mapping }) => {
   `;
 
   const { data, errors } = await gql(mutation, { input });
-
   if (errors) {
     throw errors;
   }
