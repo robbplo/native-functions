@@ -1,5 +1,4 @@
 {
-  "name": "http",
   "description": "Sends a HTTP(S) request",
   "label": "HTTP(S)",
   "category": "External",

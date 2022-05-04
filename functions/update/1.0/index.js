@@ -1,4 +1,4 @@
-import { parseAssignedProperties, fetchRecord } from '../utils';
+import { parseAssignedProperties, fetchRecord } from '../../utils';
 
 const update = async ({
   selectedRecord: {

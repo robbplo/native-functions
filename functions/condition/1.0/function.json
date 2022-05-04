@@ -1,5 +1,4 @@
 {
-  "name": "condition",
   "description": "Change the way the flow executes",
   "label": "Condition",
   "category": "Flow",
@@ -8,7 +7,12 @@
     {
       "meta": {
         "type": "Value",
-        "allowedKinds": ["NUMBER", "BOOLEAN", "STRING", "RECORD"],
+        "allowedKinds": [
+          "NUMBER",
+          "BOOLEAN",
+          "STRING",
+          "RECORD"
+        ],
         "validations": {
           "required": true
         }
