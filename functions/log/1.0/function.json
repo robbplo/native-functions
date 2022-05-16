@@ -1,6 +1,5 @@
 {
   "description": "Log message to the application logs",
-  "name": "log",
   "label": "Log Message",
   "category": "Debugging",
   "icon": "LightningIcon",

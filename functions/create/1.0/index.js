@@ -1,4 +1,4 @@
-import { parseAssignedProperties, fetchRecord } from '../utils';
+import { parseAssignedProperties, fetchRecord } from '../../utils';
 
 const create = async ({ model: { name: modelName }, mapping }) => {
   const assignProperties = parseAssignedProperties(mapping);
