@@ -1,5 +1,4 @@
 {
-  "name": "deleteRecord",
   "description": "Delete a record",
   "label": "Delete Record",
   "category": "CRUD",
@@ -12,7 +11,9 @@
           "required": true
         },
         "additional": {
-          "model": ["name"]
+          "model": [
+            "name"
+          ]
         }
       },
       "name": "record",
