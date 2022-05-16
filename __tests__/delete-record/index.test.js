@@ -1,4 +1,4 @@
-import deleteRecord from '../../functions/delete-record';
+import deleteRecord from '../../functions/delete-record/1.0';
 import { fetchRecord } from '../../functions/utils';
 
 describe('Native delete', () => {

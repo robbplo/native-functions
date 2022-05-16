@@ -1,5 +1,4 @@
 {
-  "name": "loop",
   "description": "Loops through a given collection.",
   "label": "Loop",
   "category": "FLOW",

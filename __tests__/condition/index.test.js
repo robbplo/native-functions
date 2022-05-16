@@ -1,4 +1,4 @@
-import condition from '../../functions/condition';
+import condition from '../../functions/condition/1.0';
 
 describe('Native condition', () => {
   test('The condition returns true', async () => {

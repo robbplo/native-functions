@@ -1,5 +1,4 @@
 {
-  "name": "update",
   "description": "Update a record for a given model",
   "label": "Update Record",
   "category": "CRUD",
@@ -8,7 +7,11 @@
     {
       "meta": {
         "type": "Record",
-        "additional": { "model": ["name"] },
+        "additional": {
+          "model": [
+            "name"
+          ]
+        },
         "validations": {
           "required": true
         }
