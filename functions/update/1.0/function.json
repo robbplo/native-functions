@@ -43,9 +43,6 @@
         "output": {
           "type": "Record",
           "model": "selectedRecord"
-        },
-        "validations": {
-          "required": true
         }
       },
       "name": "as",
