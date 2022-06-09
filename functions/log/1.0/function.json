@@ -5,13 +5,38 @@
   "icon": "LightningIcon",
   "options": [
     {
+      "info": "Select the log severity. The severity is also reflected in the log overview.",
+      "label": "Severity",
       "meta": {
-        "type": "Text"
+        "type": "Select",
+        "values": [
+          {
+            "label": "Debug",
+            "value": "debug"
+          },
+          {
+            "label": "Info",
+            "value": "info"
+          },
+          {
+            "label": "Warning",
+            "value": "warn"
+          },
+          {
+            "label": "Error",
+            "value": "error"
+          }
+        ]
       },
-      "name": "message",
-      "label": "Message",
-      "info": "The message that you want to log",
-      "advanced": false
+      "name": "severity"
+    },
+    {
+      "info": "Select all the variables you want to log in the application log",
+      "label": "Variables",
+      "meta": {
+        "type": "Map"
+      },
+      "name": "variables"
     }
   ],
   "yields": "NONE"
