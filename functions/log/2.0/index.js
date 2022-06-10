@@ -26,7 +26,7 @@ const pushMessage = (variable, severity) => {
       break;
   }
 };
-const log = async (severity, variables) => {
+const log = async ({ severity, variables }) => {
   variables.forEach((variable) => {
     pushMessage(variable, severity);
   });
