@@ -11,7 +11,7 @@ on:
 
 jobs:
   publish:
-    if: github.repository_owner == 'bettyblocks'
+    if: github.repository == 'bettyblocks/native-functions'
     runs-on: ubuntu-latest
     steps:
       - run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
