@@ -1,34 +1,15 @@
-const pushMessage = (variable, severity) => {
-  switch (severity) {
-    case 'log':
+const log = async ({ severity, variables }) => {
+  const severityTypes = ['log', 'info', 'debug', 'warn', 'error'];
+
+  if (severityTypes.includes(severity)) {
+    variables.forEach((variable) => {
       // eslint-disable-next-line no-console
-      console.log(`${variable.key} : ${JSON.stringify(variable.value)}`);
-      break;
-    case 'debug':
-      // eslint-disable-next-line no-console
-      console.debug(`${variable.key} : ${JSON.stringify(variable.value)}`);
-      break;
-    case 'info':
-      // eslint-disable-next-line no-console
-      console.info(`${variable.key} : ${JSON.stringify(variable.value)}`);
-      break;
-    case 'warn':
-      // eslint-disable-next-line no-console
-      console.warn(`${variable.key} : ${JSON.stringify(variable.value)}`);
-      break;
-    case 'error':
-      // eslint-disable-next-line no-console
-      console.error(`${variable.key} : ${JSON.stringify(variable.value)}`);
-      break;
-    default:
-      // eslint-disable-next-line no-console
-      console.error('Unknown severity type');
-      break;
+      console[severity](`${variable.key} : ${JSON.stringify(variable.value)}`);
+    });
+  } else {
+    // eslint-disable-next-line no-console
+    console.error('Unknown severity type');
   }
 };
-const log = async ({ severity, variables }) => {
-  variables.forEach((variable) => {
-    pushMessage(variable, severity);
-  });
-};
+
 export default log;
