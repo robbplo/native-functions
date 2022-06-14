@@ -11,10 +11,6 @@
         "type": "Select",
         "values": [
           {
-            "label": "Log",
-            "value": "log"
-          },
-          {
             "label": "Debug",
             "value": "debug"
           },

@@ -51,11 +51,4 @@ describe('Native condition', () => {
       `${variables[0].key} : ${JSON.stringify(variables[0].value)}`,
     );
   });
-  test('Log variable on unknown severity type', async () => {
-    // eslint-disable-next-line no-console
-    console.error = jest.fn();
-    await log({ severity: 'unknown', variables });
-    // eslint-disable-next-line no-console
-    expect(console.error.mock.calls[0][0]).toBe('Unknown severity type');
-  });
 });
