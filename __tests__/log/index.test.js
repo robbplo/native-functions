@@ -5,15 +5,6 @@ describe('Native condition', () => {
     { key: 'Var1 text', value: 'text' },
     { key: 'Var object', value: { key: 'Value', value: 'value' } },
   ];
-  test('Log variable on log severity type', async () => {
-    // eslint-disable-next-line no-console
-    console.log = jest.fn();
-    await log({ severity: 'log', variables });
-    // eslint-disable-next-line no-console
-    expect(console.log.mock.calls[0][0]).toBe(
-      `${variables[0].key} : ${JSON.stringify(variables[0].value)}`,
-    );
-  });
   test('Log variable on debug severity type', async () => {
     // eslint-disable-next-line no-console
     console.debug = jest.fn();
