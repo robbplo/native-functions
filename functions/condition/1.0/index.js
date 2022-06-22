@@ -1,11 +1,11 @@
-const condition = async (_, branches) => {
-  for await (let {result, steps} of branches()) {
-    if (result) {
-      await steps();
-      return {result};
-    }
+const condition = async ({ value }, steps) => {
+  const result = !!value;
+
+  if (result) {
+    await steps();
   }
-  return {result: false};
+
+  return result;
 };
 
 export default condition;
