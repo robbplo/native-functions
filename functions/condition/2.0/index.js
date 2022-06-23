@@ -1,16 +1,10 @@
 const condition = async (_, branches) => {
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    const { value, done } = branches.next();
-    if (done) {
-      return;
+  await branches.forEach(async ({ value, steps }, halt) => {
+    if (value) {
+      await steps();
+      halt();
     }
-    if (value.result) {
-      // eslint-disable-next-line no-await-in-loop
-      await value.steps();
-      return;
-    }
-  }
+  });
 };
 
 export default condition;
