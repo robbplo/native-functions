@@ -1,6 +1,6 @@
-import condition from '../../functions/condition/1.0';
+import condition from '../../../functions/condition/1.0';
 
-describe('Native condition', () => {
+describe('Native condition 1.0', () => {
   test('The condition returns true', async () => {
     const steps = jest.fn();
     await condition({ value: true }, steps);
