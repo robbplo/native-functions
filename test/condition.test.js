@@ -3,30 +3,30 @@ test('condition 2.0', async () => {
     [
       {
         label: 'Branch 1',
-        value: false,
+        value: async () => false,
         steps: async () => {
           console.log('[Branch 1] false - not supposed to be logged!');
         },
       },
       {
         label: 'Branch 2',
-        value: true,
+        value: async () => true,
         steps: async () => {
           console.log('[Branch 2] true - supposed to be logged!');
         },
       },
       {
         label: 'Else',
-        value: true,
+        value: async () => true,
         steps: async () => {
           console.log('[Else] true - but not supposed to be logged!');
         },
       },
-    ].reduce(async (previous, branch) => {
+    ].reduce(async (previous, { label, value, steps }) => {
       const halted = await previous;
       if (!halted) {
         let halt = false;
-        return fn(branch, () => {
+        return fn({ label, value: await value(), steps }, () => {
           halt = true;
         }).then(() => halt);
       }
