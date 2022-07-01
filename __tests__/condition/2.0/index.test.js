@@ -1,8 +1,8 @@
 import condition from '../../../functions/condition/2.0';
 
-const createReducer = (branches) => ({
+const createReducer = (paths) => ({
   forEach: async (fn) =>
-    branches.reduce(async (previous, { label, value, steps }) => {
+    paths.reduce(async (previous, { label, value, steps }) => {
       const halted = await previous;
       if (!halted) {
         let halt = false;
@@ -15,21 +15,21 @@ const createReducer = (branches) => ({
 });
 
 describe('Native condition 2.0', () => {
-  test.only('The condition executes first truthy branch', async () => {
-    const firstBranchSteps = jest.fn();
-    const secondBranchSteps = jest.fn();
+  test.only('The condition executes first truthy path', async () => {
+    const firstPathSteps = jest.fn();
+    const secondPathSteps = jest.fn();
     const elseSteps = jest.fn();
 
-    const branches = createReducer([
+    const paths = createReducer([
       {
-        label: 'Branch 1',
+        label: 'Path 1',
         value: async () => false,
-        steps: async () => firstBranchSteps(),
+        steps: async () => firstPathSteps(),
       },
       {
-        label: 'Branch 2',
+        label: 'Path 2',
         value: async () => true,
-        steps: async () => secondBranchSteps(),
+        steps: async () => secondPathSteps(),
       },
       {
         label: 'Else',
@@ -38,27 +38,27 @@ describe('Native condition 2.0', () => {
       },
     ]);
 
-    await condition({}, branches);
-    expect(firstBranchSteps).not.toHaveBeenCalled();
-    expect(secondBranchSteps).toHaveBeenCalled();
+    await condition({}, paths);
+    expect(firstPathSteps).not.toHaveBeenCalled();
+    expect(secondPathSteps).toHaveBeenCalled();
     expect(elseSteps).not.toHaveBeenCalled();
   });
 
-  test.only('The condition executes the else flow', async () => {
-    const firstBranchSteps = jest.fn();
-    const secondBranchSteps = jest.fn();
+  test.only('The condition executes the else path', async () => {
+    const firstPathSteps = jest.fn();
+    const secondPathSteps = jest.fn();
     const elseSteps = jest.fn();
 
-    const branches = createReducer([
+    const paths = createReducer([
       {
-        label: 'Branch 1',
+        label: 'Path 1',
         value: async () => false,
-        steps: async () => firstBranchSteps(),
+        steps: async () => firstPathSteps(),
       },
       {
-        label: 'Branch 2',
+        label: 'Path 2',
         value: async () => false,
-        steps: async () => secondBranchSteps(),
+        steps: async () => secondPathSteps(),
       },
       {
         label: 'Else',
@@ -67,9 +67,9 @@ describe('Native condition 2.0', () => {
       },
     ]);
 
-    await condition({}, branches);
-    expect(firstBranchSteps).not.toHaveBeenCalled();
-    expect(secondBranchSteps).not.toHaveBeenCalled();
+    await condition({}, paths);
+    expect(firstPathSteps).not.toHaveBeenCalled();
+    expect(secondPathSteps).not.toHaveBeenCalled();
     expect(elseSteps).toHaveBeenCalled();
   });
 });
