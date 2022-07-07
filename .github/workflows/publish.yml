@@ -72,7 +72,7 @@ jobs:
                     Authorization: `Bearer ${jwt}`,
                   },
                 }).then(response => {
-                  console.log(`${response.status} - ${response.statusText}`);
+                  console.log(`[${zone.slice(0, 3)}] ${response.status} - ${response.statusText}`);
                 });
               }
             });
