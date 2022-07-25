@@ -1,5 +1,5 @@
 {
-  "description": "Description",
+  "description": "Uploads a file to the asset store and returns a reference which can be used in a create or update",
   "label": "Upload File",
   "category": "Misc",
   "icon": "SftpUploadIcon",
