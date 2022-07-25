@@ -3,7 +3,7 @@ const uploadFile = async ({
   propertyName,
   url,
 }) => {
-  const reference = storeFile(modelName, propertyName, url);
+  const reference = await storeFile(modelName, propertyName, url);
 
   return {
     reference,
