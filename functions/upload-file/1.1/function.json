@@ -1,0 +1,60 @@
+{
+  "description": "Uploads a file to the asset store and returns a reference which can be used in a create or update",
+  "label": "Upload File",
+  "category": "Misc",
+  "icon": "UploadIcon",
+  "options": [
+    {
+      "meta": {
+        "type": "Model",
+        "validations": {
+          "required": true
+        }
+      },
+      "name": "model",
+      "label": "Model"
+    },
+    {
+      "meta": {
+        "allowedKinds": ["FILE", "IMAGE"],
+        "type": "Property",
+        "model": "model",
+        "validations": {
+          "required": true
+        }
+      },
+      "configuration": {
+        "dependsOn": [
+          {
+            "option": "model",
+            "action": "CLEAR"
+          }
+        ]
+      },
+      "name": "property",
+      "label": "Property"
+    },
+    {
+      "meta": {
+        "type": "Text",
+        "validations": {
+          "required": true
+        }
+      },
+      "name": "url",
+      "label": "URL"
+    },
+    {
+      "meta": {
+        "type": "Output",
+        "output": {
+          "type": "Text"
+        }
+      },
+      "name": "reference",
+      "label": "As",
+      "info": "The file reference"
+    }
+  ],
+  "yields": "NONE"
+}
