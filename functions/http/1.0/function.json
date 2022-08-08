@@ -2,7 +2,7 @@
   "description": "Sends a HTTP(S) request",
   "label": "HTTP(S)",
   "category": "External",
-  "icon": "LightningIcon",
+  "icon": "HttpRequestIcon",
   "options": [
     {
       "info": "Enter what protocol the receiving end needs to use. You can choose between HTTP and HTTPS, which one you should use depends on your host.",
