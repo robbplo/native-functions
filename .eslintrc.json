@@ -30,6 +30,7 @@
   "globals": {
     "gql": "readonly",
     "fetch": "readonly",
+    "smtp": "readonly",
     "storeFile": "readonly"
   }
 }
