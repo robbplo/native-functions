@@ -15,7 +15,16 @@ const parseBelongsTo = (name, value) => {
   if (isRecord(value)) {
     const keys = Object.keys(value);
     return `${name} {
-      ${keys.map((key) => key).join('\n')}
+      ${keys
+        .map((key) => {
+          if (isRecord(value[key])) {
+            return `${key} {
+              ${Object.keys(value[key]).join('\n')}
+            }`;
+          }
+          return key;
+        })
+        .join('\n')}
     }`;
   }
 
