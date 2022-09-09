@@ -7,7 +7,8 @@ const isRecord = (value) =>
   value &&
   typeof value === 'object' &&
   !Array.isArray(value) &&
-  Object.keys(value).length > 0;
+  Object.keys(value).length > 0 &&
+  value.id !== undefined;
 
 const isCollection = (value) => Array.isArray(value) && isRecord(value[0]);
 
@@ -15,7 +16,16 @@ const parseBelongsTo = (name, value) => {
   if (isRecord(value)) {
     const keys = Object.keys(value);
     return `${name} {
-      ${keys.map((key) => key).join('\n')}
+      ${keys
+        .map((key) => {
+          if (isRecord(value[key])) {
+            return `${key} {
+              ${Object.keys(value[key]).join('\n')}
+            }`;
+          }
+          return key;
+        })
+        .join('\n')}
     }`;
   }
 
