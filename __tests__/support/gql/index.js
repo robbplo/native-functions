@@ -1,4 +1,5 @@
 import { graphql, buildSchema } from 'graphql';
+import Task from '../task';
 import User from '../user';
 
 class AuthenticationError extends Error {
@@ -20,6 +21,14 @@ const userDatabase = {
     password: 'test1234',
     city: null,
     tasks: { id: [] },
+  }),
+};
+
+const taskDatabase = {
+  1: new Task(1, {
+    id: 1,
+    name: 'First task',
+    user: userDatabase[1],
   }),
 };
 
@@ -48,6 +57,7 @@ const schema = buildSchema(`
   type Task {
     id: Int!
     name: String!
+    user: User
   }
 
   type Token {
@@ -82,8 +92,13 @@ const schema = buildSchema(`
     id: IdEquals!
   }
 
+  input TaskFilterInput {
+    id: IdEquals!
+  }
+
   type Query {
     oneUser(where: UserFilterInput): User
+    oneTask(where: TaskFilterInput): Task
   }
 
   type Mutation {
@@ -95,6 +110,13 @@ const schema = buildSchema(`
 `);
 
 const root = {
+  oneTask({
+    where: {
+      id: { eq: id },
+    },
+  }) {
+    return taskDatabase[id];
+  },
   oneUser({
     where: {
       id: { eq: id },

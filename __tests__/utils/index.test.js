@@ -30,6 +30,36 @@ const properties = [
   },
 ];
 
+const taskProperties = [
+  {
+    key: [
+      {
+        name: 'id',
+        kind: 'INTEGER',
+      },
+    ],
+    value: 1,
+  },
+  {
+    key: [
+      {
+        name: 'name',
+        kind: 'STRING',
+      },
+    ],
+    value: 'First task',
+  },
+  {
+    key: [
+      {
+        name: 'user',
+        kind: 'BELONGS_TO',
+      },
+    ],
+    value: { firstName: 'John', id: 1, lastName: 'Doe', age: 30 },
+  },
+];
+
 describe('Utility functions', () => {
   test('parseAssignedProperties', () => {
     expect(parseAssignedProperties(properties)).toStrictEqual({
@@ -64,5 +94,19 @@ describe('Utility functions', () => {
     } catch ({ message }) {
       expect(message).toContain('Unknown type');
     }
+  });
+
+  test('fetchRecord returns an record with a belongs to relation', async () => {
+    const result = await fetchRecord('Task', 1, taskProperties);
+    expect(result).toMatchObject({
+      id: 1,
+      name: 'First task',
+      user: {
+        id: 1,
+        firstName: 'John',
+        lastName: 'Doe',
+        age: 30,
+      },
+    });
   });
 });
