@@ -16,6 +16,7 @@ const http = async ({
   url,
   method,
   body,
+  timeout,
   headers = [],
   protocol,
   queryParameters = [],
@@ -24,6 +25,7 @@ const http = async ({
   const options = {
     method,
     headers: parseHeaders(headers),
+    timeout: timeout && timeout > 0 ? timeout : 15000,
     ...(method !== 'get' && { body }),
   };
 
