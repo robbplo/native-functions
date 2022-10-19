@@ -2,17 +2,15 @@
   "description": "Change the way the flow executes",
   "label": "Condition",
   "category": "Flow",
-  "icon": "ConditionIcon",
+  "icon": {
+    "name": "ConditionIcon",
+    "color": "Yellow"
+  },
   "options": [
     {
       "meta": {
         "type": "Value",
-        "allowedKinds": [
-          "NUMBER",
-          "BOOLEAN",
-          "STRING",
-          "RECORD"
-        ],
+        "allowedKinds": ["NUMBER", "BOOLEAN", "STRING", "RECORD"],
         "validations": {
           "required": true
         }

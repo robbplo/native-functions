@@ -2,7 +2,10 @@
   "description": "Loops through a given collection.",
   "label": "Loop",
   "category": "FLOW",
-  "icon": "LoopIcon",
+  "icon": {
+    "name": "LoopIcon",
+    "color": "Blue"
+  },
   "options": [
     {
       "meta": {
