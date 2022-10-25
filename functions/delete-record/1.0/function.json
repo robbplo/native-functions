@@ -2,7 +2,10 @@
   "description": "Delete a record",
   "label": "Delete Record",
   "category": "CRUD",
-  "icon": "DeleteIcon",
+  "icon": {
+    "name": "TrashIcon",
+    "color": "Pink"
+  },
   "options": [
     {
       "meta": {
@@ -11,9 +14,7 @@
           "required": true
         },
         "additional": {
-          "model": [
-            "name"
-          ]
+          "model": ["name"]
         }
       },
       "name": "record",

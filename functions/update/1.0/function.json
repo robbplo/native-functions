@@ -2,15 +2,16 @@
   "description": "Update a record for a given model",
   "label": "Update Record",
   "category": "CRUD",
-  "icon": "UpdateIcon",
+  "icon": {
+    "name": "ArrowClockwiseIcon",
+    "color": "Green"
+  },
   "options": [
     {
       "meta": {
         "type": "Record",
         "additional": {
-          "model": [
-            "name"
-          ]
+          "model": ["name"]
         },
         "validations": {
           "required": true

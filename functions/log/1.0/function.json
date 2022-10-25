@@ -2,7 +2,10 @@
   "description": "Log message to the application logs",
   "label": "Log Message",
   "category": "Debugging",
-  "icon": "LightningIcon",
+  "icon": {
+    "name": "FileLogIcon",
+    "color": "Orange"
+  },
   "options": [
     {
       "meta": {
