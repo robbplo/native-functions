@@ -1,6 +1,6 @@
-import uploadFile from '../../../functions/upload-file/1.2';
+import storePropertyFile from '../../../functions/store-property-file/1.2';
 
-describe('Native upload file', () => {
+describe('Native store property file', () => {
   test('It uploads a file', async () => {
     const model = {
       name: 'Product',
@@ -8,7 +8,7 @@ describe('Native upload file', () => {
     const property = [{ name: 'image', kind: 'IMAGE' }];
     const url = 'http://my.awesome.image/test.png';
 
-    const { reference } = await uploadFile({ model, property, url });
+    const { reference } = await storePropertyFile({ model, property, url });
 
     expect(reference).toBeDefined();
   });
@@ -23,7 +23,7 @@ describe('Native upload file', () => {
     const url = 'http://my.awesome.image/test.png';
 
     try {
-      await uploadFile({ model, property, url });
+      await storePropertyFile({ model, property, url });
     } catch ({ message }) {
       expect(message).toBe('Something went wrong.');
     }
@@ -42,7 +42,7 @@ describe('Native upload file', () => {
       },
     ];
 
-    const { reference } = await uploadFile({
+    const { reference } = await storePropertyFile({
       model,
       property,
       url,

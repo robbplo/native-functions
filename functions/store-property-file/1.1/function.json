@@ -1,6 +1,6 @@
 {
   "description": "Uploads a file to the asset store and returns a reference which can be used in a create or update",
-  "label": "Upload File",
+  "label": "Store Property File",
   "category": "Misc",
   "icon": {
     "name": "UploadIcon",
@@ -46,14 +46,6 @@
       },
       "name": "url",
       "label": "URL"
-    },
-    {
-      "info": "Sometimes you may need to pass some additional information in your request, this is possible by adding variables in your header.",
-      "label": "Headers",
-      "meta": {
-        "type": "Map"
-      },
-      "name": "headers"
     },
     {
       "meta": {

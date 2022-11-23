@@ -1,7 +1,7 @@
 const parseHeaders = (headers) =>
   headers.reduce((acc, { key, value }) => ({ ...acc, [key]: value }), {});
 
-const uploadFile = async ({
+const storePropertyFile = async ({
   model: { name: modelName },
   property: [{ name: propertyName }],
   url,
@@ -16,4 +16,4 @@ const uploadFile = async ({
   };
 };
 
-export default uploadFile;
+export default storePropertyFile;
