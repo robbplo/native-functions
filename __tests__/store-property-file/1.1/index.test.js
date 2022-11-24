@@ -1,14 +1,14 @@
-import uploadFile from '../../../functions/upload-file/1.0';
+import storePropertyFile from '../../../functions/store-property-file/1.1';
 
-describe('Native upload file', () => {
+describe('Native store property file file', () => {
   test('It uploads a file', async () => {
     const model = {
       name: 'Product',
     };
-    const propertyName = 'image';
+    const property = [{ name: 'image', kind: 'IMAGE' }];
     const url = 'http://my.awesome.image/test.png';
 
-    const { reference } = await uploadFile({ model, propertyName, url });
+    const { reference } = await storePropertyFile({ model, property, url });
 
     expect(reference).toBeDefined();
   });
@@ -19,11 +19,11 @@ describe('Native upload file', () => {
     const model = {
       name: 'Error',
     };
-    const propertyName = 'image';
+    const property = [{ name: 'image', kind: 'IMAGE' }];
     const url = 'http://my.awesome.image/test.png';
 
     try {
-      await uploadFile({ model, propertyName, url });
+      await storePropertyFile({ model, property, url });
     } catch ({ message }) {
       expect(message).toBe('Something went wrong.');
     }

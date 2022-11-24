@@ -1,4 +1,4 @@
-const uploadFile = async ({
+const storePropertyFile = async ({
   model: { name: modelName },
   property: [{ name: propertyName }],
   url,
@@ -10,4 +10,4 @@ const uploadFile = async ({
   };
 };
 
-export default uploadFile;
+export default storePropertyFile;
