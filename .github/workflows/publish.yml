@@ -14,7 +14,7 @@ jobs:
       - run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: branch
       - run: npm config set '//registry.npmjs.org/:_authToken' '${{ secrets.NPM_TOKEN }}'
-      - run: npm install -g @betty-blocks/cli @betty-blocks/jaws form-data fs-extra node-fetch@2 shelljs
+      - run: npm install -g @betty-blocks/cli @betty-blocks/jaws form-data fs-extra shelljs
       - uses: actions/checkout@v2
       - uses: actions/github-script@v6
         with:
@@ -23,7 +23,6 @@ jobs:
             const cli = `${global}/@betty-blocks/cli/build`;
 
             const Jaws = require(`${global}/@betty-blocks/jaws`);
-            const fetch = require(`${global}/node-fetch`);
             const FormData = require(`${global}/form-data`);
             const fs = require(`${global}/fs-extra`);
             const path = require('path');
