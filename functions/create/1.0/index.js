@@ -1,7 +1,8 @@
-import { parseAssignedProperties, fetchRecord } from '../../utils';
+import { parseAssignedProperties, fetchRecord, parseValidationSets } from '../../utils';
 
-const create = async ({ model: { name: modelName }, mapping }) => {
+const create = async ({ model: { name: modelName }, mapping, validationSet }) => {
   const assignProperties = parseAssignedProperties(mapping);
+  const validationSet = parseValidationSet(validationSet)
 
   const input = {
     ...assignProperties,
@@ -10,7 +11,7 @@ const create = async ({ model: { name: modelName }, mapping }) => {
   const mutationName = `create${modelName}`;
 
   const mutation = `
-    mutation($input: ${modelName}Input) {
+    mutation($input: ${modelName}Input${validationSets}) {
       ${mutationName}(input: $input) {
         id
       }

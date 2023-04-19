@@ -20,6 +20,14 @@
     },
     {
       "meta": {
+        "type": "String",
+        "###comment": "type should be something like `ValidationSet` once frontend supports it"
+      },
+      "name": "validationSet",
+      "info": "The validations which will be used when creating the record."
+    },
+    {
+      "meta": {
         "type": "PropertyMap",
         "model": "model"
       },

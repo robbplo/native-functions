@@ -104,6 +104,13 @@ export const parseAssignedProperties = (properties) =>
     };
   }, {});
 
+export const parseValidationSet = (validationSet) => {
+  return Array.isArray(validationSet)
+    ? ` validationSet: [${validationSet.join(', ')}]`
+    : ''
+}
+
+
 export const fetchRecord = async (modelName, id, properties = []) => {
   const queryName = `one${modelName}`;
 
