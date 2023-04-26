@@ -84,6 +84,14 @@
       "name": "body"
     },
     {
+      "info": "An optional time restriction on how long the request is allowed to take (defaults to 15000ms).",
+      "label": "Timeout",
+      "meta": {
+        "type": "Number"
+      },
+      "name": "timeout"
+    },
+    {
       "meta": {
         "type": "Output",
         "output": {

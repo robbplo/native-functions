@@ -108,6 +108,14 @@ export const parseAssignedProperties = (properties) =>
     };
   }, {});
 
+export const parseValidationSets = (validationSets) => {
+  if (typeof validationSets == 'string') {
+    return `validationSets: [${validationSets}]`
+  }
+
+  return null
+}
+
 export const fetchRecord = async (modelName, id, properties = []) => {
   const queryName = `one${modelName}`;
 
