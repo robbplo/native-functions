@@ -1,6 +1,6 @@
 {
   "description": "Create a record for a given model",
-  "label": "Create Record",
+  "label": "Create Record with validation set",
   "category": "CRUD",
   "icon": {
     "name": "PlusIcon",
@@ -17,6 +17,24 @@
       "name": "model",
       "label": "Model",
       "info": "The model you want to create a record for."
+    },
+    {
+      "meta": {
+        "type": "Select",
+        "values": [
+          {
+            "label": "Default",
+            "value": "default"
+          },
+          {
+            "label": "Empty",
+            "value": "empty"
+          }
+        ]
+      },
+      "name": "validationSets",
+      "label": "Validation set",
+      "info": "The validations which will be used when creating the record."
     },
     {
       "meta": {

@@ -1,17 +1,22 @@
-import { parseAssignedProperties, fetchRecord } from '../../utils';
+import { parseAssignedProperties, fetchRecord, parseValidationSets } from '../../utils';
 
-const create = async ({ model: { name: modelName }, mapping }) => {
+const create = async ({ model: { name: modelName }, validationSets = null, mapping }) => {
   const assignProperties = parseAssignedProperties(mapping);
+  const parsedValidationSets = parseValidationSets(validationSets)
 
   const input = {
     ...assignProperties,
   };
 
   const mutationName = `create${modelName}`;
+  const mutationArguments = [
+    'input: $input',
+    parsedValidationSets
+  ].filter().join(', ')
 
   const mutation = `
     mutation($input: ${modelName}Input) {
-      ${mutationName}(input: $input) {
+      ${mutationName}(${mutationArguments}) {
         id
       }
     }
